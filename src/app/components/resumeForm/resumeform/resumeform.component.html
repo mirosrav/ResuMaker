@@ -1,0 +1,13 @@
+<div>
+    <form [formGroup]="resumeForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" id="" formControlName="firstName" [ngModel]="dataform" (ngModelChange)="onChange($event)">
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lastname" id="" formControlName="lastName">
+        <button type="submit" (click)="formData()">submit</button>
+    </form>
+</div>
+<!-- <div>
+    <p>{{count}}</p>
+    <button (click)="Increase()">increase</button>
+</div> -->
