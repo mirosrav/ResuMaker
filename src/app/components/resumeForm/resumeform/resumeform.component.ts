@@ -1,5 +1,6 @@
-import { Component, inject, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, inject, EventEmitter, Output, OnChanges, SimpleChanges, output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup,ReactiveFormsModule } from '@angular/forms';
+import { SharedServiceService } from '../../../services/sharedService.service';
 
 @Component({
   selector: 'app-resumeform',
@@ -9,29 +10,18 @@ import { FormBuilder, FormControl, FormGroup,ReactiveFormsModule } from '@angula
   styleUrl: './resumeform.component.css'
 })
 export class ResumeformComponent{
-  dataform:any;
 
-  @Output() onFormSubmitEmitter = new EventEmitter<any>();
+  constructor(private sharedData:SharedServiceService){}
 
   resumeForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl('')
   }) 
 
-  // onSubmit(){
-  //   console.log(this.resumeForm.value);
-  // }
+  onSubmit(formData: any){
+    this.resumeForm.patchValue(formData);
+    console.log(formData);
+  }
 
-// count = 0;
 
-// Increase(){
-//   this.count;
-// }
-
-formData(){
-  this.onFormSubmitEmitter.emit(this.resumeForm.value);
-}
-onChange(value:any){
-    this.resumeForm = value.target.value
-}
 }
