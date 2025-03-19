@@ -1,10 +1,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-6" style="border-right: solid 1px black;">
-            <app-resumeform></app-resumeform>
+            <!-- <app-resumeform (next)="nextStep()" *ngIf="currentStep === 0" (resumeHeaderData)="handleFormSubmit($event)"></app-resumeform> -->
+            <app-resumeform (resumeHeaderData)="handleFormSubmit($event)"></app-resumeform>
+            <app-header *ngIf="currentStep === 1"></app-header>
         </div>
         <div class="col-6">
-            <app-resume></app-resume>
+            <app-resume [data]="formData"></app-resume>
         </div>
     </div>
 </div>

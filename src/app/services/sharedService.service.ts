@@ -4,15 +4,10 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SharedServiceService {
-  sharedData:any;
-  constructor() { }
+  formData:any[]=[];
 
-  setData(data:any){
-    this.sharedData = data;
+  logFormData() {
+    console.log("Current formData in service:", this.formData);
   }
-
-  getData():any{
-    return this.sharedData;
-  }
-
+  
 }

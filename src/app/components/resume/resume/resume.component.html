@@ -1,15 +1,15 @@
 <div class="container p-3">
   <div class="container" style="border-bottom: solid 1px;">
     <div class="mb-3">
-        <div class="row ">
-            <h3 class="d-flex justify-content-center" style="height: 40px; background-color: black; color: white;">{{getFormData()}}</h3>
+        <div class="row">
+            <h3 class="d-flex justify-content-center" style="height: 40px; background-color: black; color: white;">{{data?.firstName}} {{data?.lastName}}</h3>
         </div>
         <div class="d-flex justify-content-center">
             <ul class="list-group list-group-horizontal" style="list-style: none;">
-                <li class="px-1">Seoul,South Korea</li>
-                <li class="px-1">&#x2022;<span class="px-1"></span>aizat.kamarudin67&#64;gmail.com</li>
-                <li class="px-1">&#x2022;<span class="px-1"></span>014-8252706</li>
-                <li class="px-1">&#x2022;<span class="px-1"></span>in/AizatKamarudin</li>
+                <li class="px-1">{{data?.contact.location}}</li>
+                <li class="px-1">&#x2022;<span class="px-1" ></span>{{data?.contact.email}}</li>
+                <li class="px-1">&#x2022;<span class="px-1"></span>{{data?.contact.phone}}</li>
+                <li class="px-1">&#x2022;<span class="px-1"></span>{{data?.contact.site}}</li>
             </ul>
         </div>
     </div>
@@ -20,7 +20,7 @@
           <h3 class="d-flex justify-content-center">PROFESSIONAL SUMMARY</h3>
       </div>
       <div class="d-flex justify-content-center">
-          <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          <p style="text-align: center;">{{data?.summary}}</p>
       </div>
   </div>
 </div>

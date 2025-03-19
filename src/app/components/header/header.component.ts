@@ -1,4 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { EventEmitter } from 'stream';
+import { SharedServiceService } from '../../services/sharedService.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +11,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  @Input() headerData: any;
 
-  
-}
+  }  

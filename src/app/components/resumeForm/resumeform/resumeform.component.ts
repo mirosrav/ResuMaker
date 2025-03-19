@@ -1,5 +1,5 @@
-import { Component, inject, EventEmitter, Output, OnChanges, SimpleChanges, output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup,ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Output,} from '@angular/core';
+import { FormControl, FormGroup,ReactiveFormsModule } from '@angular/forms';
 import { SharedServiceService } from '../../../services/sharedService.service';
 
 @Component({
@@ -10,17 +10,42 @@ import { SharedServiceService } from '../../../services/sharedService.service';
   styleUrl: './resumeform.component.css'
 })
 export class ResumeformComponent{
+  @Output() resumeHeaderData = new EventEmitter<any>();
+  @Output() next = new EventEmitter<void>();
+  isHeaderVisible = true;
+  isProSumVisible = false;
 
-  constructor(private sharedData:SharedServiceService){}
+  constructor(private headerData:SharedServiceService){
+    this.resumeForm.valueChanges.subscribe(value => {
+      this.resumeHeaderData.emit(value);
+    })
+  }
 
   resumeForm = new FormGroup({
     firstName: new FormControl(''),
-    lastName: new FormControl('')
-  }) 
+    lastName: new FormControl(''),
+    contact: new FormGroup({
+      location: new FormControl(''),
+      email: new FormControl(''),
+      phone: new FormControl(''),
+      site: new FormControl(''),
+    }),
+    summary: new FormControl('')
+  })
 
-  onSubmit(formData: any){
-    this.resumeForm.patchValue(formData);
-    console.log(formData);
+
+  onSubmit(){
+    this.next.emit();
+    this.addData();
+    console.log(this.headerData.logFormData())
+  }
+
+  addData(){
+    if(this.headerData.formData.length === 0){
+      this.headerData.formData.push(this.resumeForm.value);
+    }else{
+      this.headerData.formData[0] = this.resumeForm.value;
+    }
   }
 
 
