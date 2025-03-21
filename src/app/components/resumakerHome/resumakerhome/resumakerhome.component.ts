@@ -3,6 +3,7 @@ import { ResumeComponent } from "../../resume/resume/resume.component";
 import { ResumeformComponent } from "../../resumeForm/resumeform/resumeform.component";
 import { HeaderComponent } from "../../header/header.component";
 import { CommonModule } from '@angular/common';
+import { SharedServiceService } from '../../../services/sharedService.service';
 
 @Component({
   selector: 'app-resumakerhome',
@@ -12,22 +13,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './resumakerhome.component.css'
 })
 export class ResumakerhomeComponent {
+
+  constructor(public resumeService:SharedServiceService){}
+
   formData: any;
-  currentStep = 0;
-
-  sections = ['header', 'summary', 'skills'];
-
-  nextStep(){
-    if(this.currentStep < this.sections.length - 1){
-      this.currentStep++;
-    }
-  }
-
-  prevStep(){
-    if(this.currentStep > 0){
-      this.currentStep--;
-    }
-  }
   
   handleFormSubmit(data: any) {
     this.formData = data;

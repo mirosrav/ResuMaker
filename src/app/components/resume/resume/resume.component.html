@@ -1,106 +1,108 @@
-<div class="container p-3">
-  <div class="container" style="border-bottom: solid 1px;">
-    <div class="mb-3">
-        <div class="row">
-            <h3 class="d-flex justify-content-center" style="height: 40px; background-color: black; color: white;">{{data?.firstName}} {{data?.lastName}}</h3>
-        </div>
-        <div class="d-flex justify-content-center">
-            <ul class="list-group list-group-horizontal" style="list-style: none;">
-                <li class="px-1">{{data?.contact.location}}</li>
-                <li class="px-1">&#x2022;<span class="px-1" ></span>{{data?.contact.email}}</li>
-                <li class="px-1">&#x2022;<span class="px-1"></span>{{data?.contact.phone}}</li>
-                <li class="px-1">&#x2022;<span class="px-1"></span>{{data?.contact.site}}</li>
-            </ul>
+<div #resumePreview id="resume-preview">
+    <div class="container p-3">
+      <div class="container" style="border-bottom: solid 1px;">
+        <div class="mb-3">
+            <div class="row">
+                <h3 class="d-flex justify-content-center" style="height: 40px; background-color: black; color: white;">{{resumeService.headerFormData()?.firstName}} {{resumeService.headerFormData()?.lastName}}</h3><!-- data daripada service instead of own component-->
+            </div>
+            <div class="d-flex justify-content-center">
+                <ul class="list-group list-group-horizontal" style="list-style: none;">
+                    <li class="px-1">{{resumeService.headerFormData()?.contact.location}}</li>
+                    <li class="px-1">&#x2022;<span class="px-1" ></span>{{resumeService.headerFormData()?.contact.email}}</li>
+                    <li class="px-1">&#x2022;<span class="px-1"></span>{{resumeService.headerFormData()?.contact.phone}}</li>
+                    <li class="px-1">&#x2022;<span class="px-1"></span>{{resumeService.headerFormData()?.contact.site}}</li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
-<div class="container" style="border-bottom: solid 1px;">
-  <div class="my-3">
-      <div class="row ">
-          <h3 class="d-flex justify-content-center">PROFESSIONAL SUMMARY</h3>
-      </div>
-      <div class="d-flex justify-content-center">
-          <p style="text-align: center;">{{data?.summary}}</p>
-      </div>
-  </div>
-</div>
-<div class="container" style="border-bottom: solid 1px;">
-  <div class="my-3">
-      <div class="row ">
-          <h3 class="d-flex justify-content-center">PROFESSIONAL EXPERIENCE</h3>
-      </div>
-      <div>
-        <div>
-          <div class="row">
-              <div class="col-6 text-start" style="font-weight: bold;">
-                  <div>Carsome</div>
-                  <div>CEO & Founder</div>
-              </div>
-              <div class="col-6 text-end">
-                  <div>August 2015 - Present</div>
-                  <div>Pyeongyang, N.K</div>
-              </div>
+    <div class="container" style="border-bottom: solid 1px;">
+      <div class="my-3">
+          <div class="row ">
+              <h3 class="d-flex justify-content-center">PROFESSIONAL SUMMARY</h3>
           </div>
-          <div class="row">
-              <div>
-                  <ul>
-                      <li>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      </li>
-                      <li>
-                          Sed vestibulum urna eget nisi pharetra sodales.
-                      </li>
-                      <li>
-                          Cras in tellus sit amet metus lobortis vehicula et ut dolor.
-                      </li>
-                      <li>
-                          Maecenas nec dolor in turpis sollicitudin commodo quis ac ipsum
-                      </li>
-                  </ul>
-              </div>
+          <div class="d-flex justify-content-center">
+              <p style="text-align: center;">{{resumeService.summaryFormData()?.summary}}</p>
           </div>
       </div>
-      
-      </div>
-  </div>
-</div>
-<div class="container" style="border-bottom: solid 1px;">
-  <div class="my-3">
-      <div class="row ">
-          <h3 class="d-flex justify-content-center">EDUCATION</h3>
-      </div>
-      <div>
-        <div>
-          <div class="row">
-              <div class="col-6 text-start">
-                  <div style="font-weight: bold;">Bachelor of Computer Science, Computer Network & Security</div>
-                  <div>Universiti Teknologi Malaysia, Skudai, Johor Bahru</div>
+    </div>
+    <div class="container" style="border-bottom: solid 1px;">
+      <div class="my-3">
+          <div class="row ">
+              <h3 class="d-flex justify-content-center">PROFESSIONAL EXPERIENCE</h3>
+          </div>
+          <div>
+            <div>
+              <div class="row">
+                  <div class="col-6 text-start" style="font-weight: bold;">
+                      <div>Carsome</div>
+                      <div>CEO & Founder</div>
+                  </div>
+                  <div class="col-6 text-end">
+                      <div>August 2015 - Present</div>
+                      <div>Pyeongyang, N.K</div>
+                  </div>
               </div>
-              <div class="col-6 text-end">
-                  <div>August 2015 - August 2020</div>
+              <div class="row">
+                  <div>
+                      <ul>
+                          <li>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                          </li>
+                          <li>
+                              Sed vestibulum urna eget nisi pharetra sodales.
+                          </li>
+                          <li>
+                              Cras in tellus sit amet metus lobortis vehicula et ut dolor.
+                          </li>
+                          <li>
+                              Maecenas nec dolor in turpis sollicitudin commodo quis ac ipsum
+                          </li>
+                      </ul>
+                  </div>
               </div>
           </div>
+          
+          </div>
       </div>
-      
+    </div>
+    <div class="container" style="border-bottom: solid 1px;">
+      <div class="my-3">
+          <div class="row ">
+              <h3 class="d-flex justify-content-center">EDUCATION</h3>
+          </div>
+          <div>
+            <div>
+              <div class="row">
+                  <div class="col-6 text-start">
+                      <div style="font-weight: bold;">Bachelor of Computer Science, Computer Network & Security</div>
+                      <div>Universiti Teknologi Malaysia, Skudai, Johor Bahru</div>
+                  </div>
+                  <div class="col-6 text-end">
+                      <div>August 2015 - August 2020</div>
+                  </div>
+              </div>
+          </div>
+          
+          </div>
       </div>
-  </div>
+    </div>
+    <div class="container" style="border-bottom: solid 1px;">
+      <div class="my-3">
+          <div class="row ">
+              <h3 class="d-flex justify-content-center">SKILLS</h3>
+          </div>
+          <div>
+            <div>
+              <p style="font-weight: bold;">LeaderShip: <span style="font-weight: 400;">Speaking, Fundraising, Product Development, Communication, Partnership</span></p>
+              <p style="font-weight: bold;">Front End: <span style="font-weight: 400;">HTML, CSS, Bootstrap, Angular</span></p>
+          </div>
+          </div>
+      </div>
+    </div>
+    
 </div>
-<div class="container" style="border-bottom: solid 1px;">
-  <div class="my-3">
-      <div class="row ">
-          <h3 class="d-flex justify-content-center">SKILLS</h3>
-      </div>
-      <div>
-        <div>
-          <p style="font-weight: bold;">LeaderShip: <span style="font-weight: 400;">Speaking, Fundraising, Product Development, Communication, Partnership</span></p>
-          <p style="font-weight: bold;">Front End: <span style="font-weight: 400;">HTML, CSS, Bootstrap, Angular</span></p>
-      </div>
-      </div>
-  </div>
-</div>
 
-
-
+<button class="noclick" (click)="downloadPdf()"></button>
 
 <!-- <div class="container p-3">
     <app-header [headerData]="nameFromParent"></app-header>

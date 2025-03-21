@@ -1,13 +1,11 @@
 <div [style.display]="isHeaderVisible ?'block' : 'none' ">
     <form class="form-control" [formGroup]="resumeForm">
-       <div>
+        <div>
             <label for="firstName">First Name:</label>
-            <!-- <input type="text" name="firstName" id="" formControlName="firstName" [ngModel]="dataform" (ngModelChange)="onChange($event)"> -->
             <input type="text" name="firstName" id="" formControlName="firstName">
             <label for="lastName">Last Name:</label>
             <input type="text" name="lastname" id="" formControlName="lastName">
-            <!-- <button type="submit" (click)="onSubmit(resumeForm.value)">submit</button> -->
-       </div>
+        </div>
        <div formGroupName="contact">
             <div>
                 <label for="location">Location:</label>
@@ -24,7 +22,7 @@
                 <input type="text" name="site" id="" formControlName="site">
             </div>
         </div>
-        <button type="submit" (click)="onSubmit()">submit</button>
+        <button type="submit" (click)="updateForm()">submit</button>
     </form>
 </div>
 
