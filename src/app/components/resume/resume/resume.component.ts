@@ -22,6 +22,7 @@ export class ResumeComponent implements OnInit{
   @ViewChild('resumePreview') resumePreview!: ElementRef;//get the div with the related id
 
   savedHeaderData = JSON.parse(localStorage.getItem('headerFormData') || '{}');
+  savedSummaryData = JSON.parse(localStorage.getItem('summaryFormData') || '{}');
   resumeDatas:any;
   @Input() data: any;
 

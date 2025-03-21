@@ -3,14 +3,14 @@
       <div class="container" style="border-bottom: solid 1px;">
         <div class="mb-3">
             <div class="row">
-                <h3 class="d-flex justify-content-center" style="height: 40px; background-color: black; color: white;">{{resumeService.headerFormData()?.firstName  || savedHeaderData.firstName}} {{resumeService.headerFormData()?.lastName}}</h3><!-- data daripada service instead of own component-->
+                <h3 class="d-flex justify-content-center" style="height: 40px; background-color: black; color: white;">{{resumeService.headerFormData()?.firstName  || savedHeaderData.firstName}} {{resumeService.headerFormData()?.lastName || savedHeaderData.lastName}}</h3><!-- data daripada service instead of own component-->
             </div>
             <div class="d-flex justify-content-center">
                 <ul class="list-group list-group-horizontal" style="list-style: none;">
-                    <li class="px-1">{{resumeService.headerFormData()?.contact.location}}</li>
-                    <li class="px-1">&#x2022;<span class="px-1" ></span>{{resumeService.headerFormData()?.contact.email}}</li>
-                    <li class="px-1">&#x2022;<span class="px-1"></span>{{resumeService.headerFormData()?.contact.phone}}</li>
-                    <li class="px-1">&#x2022;<span class="px-1"></span>{{resumeService.headerFormData()?.contact.site}}</li>
+                    <li class="px-1">{{resumeService.headerFormData()?.contact.location || savedHeaderData?.contact.location}}</li>
+                    <li class="px-1">&#x2022;<span class="px-1" ></span>{{resumeService.headerFormData()?.contact.email || savedHeaderData?.contact.email}}</li>
+                    <li class="px-1">&#x2022;<span class="px-1"></span>{{resumeService.headerFormData()?.contact.phone || savedHeaderData?.contact.phone}}</li>
+                    <li class="px-1">&#x2022;<span class="px-1"></span>{{resumeService.headerFormData()?.contact.site || savedHeaderData?.contact.site}}</li>
                 </ul>
             </div>
         </div>
