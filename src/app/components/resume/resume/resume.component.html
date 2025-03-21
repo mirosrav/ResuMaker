@@ -3,7 +3,7 @@
       <div class="container" style="border-bottom: solid 1px;">
         <div class="mb-3">
             <div class="row">
-                <h3 class="d-flex justify-content-center" style="height: 40px; background-color: black; color: white;">{{resumeService.headerFormData()?.firstName}} {{resumeService.headerFormData()?.lastName}}</h3><!-- data daripada service instead of own component-->
+                <h3 class="d-flex justify-content-center" style="height: 40px; background-color: black; color: white;">{{resumeService.headerFormData()?.firstName  || savedHeaderData.firstName}} {{resumeService.headerFormData()?.lastName}}</h3><!-- data daripada service instead of own component-->
             </div>
             <div class="d-flex justify-content-center">
                 <ul class="list-group list-group-horizontal" style="list-style: none;">

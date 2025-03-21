@@ -59,7 +59,5 @@ export class SharedServiceService {
   }
 
 
-  downloadPdf(){
-    
-  }
+  
 }

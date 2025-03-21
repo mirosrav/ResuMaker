@@ -21,11 +21,12 @@ import jsPDF from 'jspdf';
 export class ResumeComponent implements OnInit{
   @ViewChild('resumePreview') resumePreview!: ElementRef;//get the div with the related id
 
+  savedHeaderData = JSON.parse(localStorage.getItem('headerFormData') || '{}');
   resumeDatas:any;
   @Input() data: any;
 
   constructor(public resumeService:SharedServiceService){
-    
+    console.log(this.savedHeaderData);
   }
 
 ngOnInit(){
