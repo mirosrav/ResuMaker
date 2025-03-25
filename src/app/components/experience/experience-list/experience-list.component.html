@@ -1,30 +1,17 @@
 <div>
-    <div class="row">
-        <div class="col-6 text-start" style="font-weight: bold;">
-            <div>Carsome</div>
-            <div>CEO & Founder</div>
-        </div>
-        <div class="col-6 text-end">
-            <div>August 2015 - Present</div>
-            <div>Pyeongyang, N.K</div>
-        </div>
-    </div>
-    <div class="row">
+    <form [formGroup]="experienceForm">
         <div>
-            <ul>
-                <li>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </li>
-                <li>
-                    Sed vestibulum urna eget nisi pharetra sodales.
-                </li>
-                <li>
-                    Cras in tellus sit amet metus lobortis vehicula et ut dolor.
-                </li>
-                <li>
-                    Maecenas nec dolor in turpis sollicitudin commodo quis ac ipsum
-                </li>
-            </ul>
+            <label for="company">Company Name :</label>
+            <input type="text" name="company" formControlName="company">
         </div>
-    </div>
+        <div formArrayName="expHighlight">
+            <label for="experience">Experience</label>
+
+            <div *ngFor="let highlight of expHighlight.controls; let i = index">
+                <input [formControlName]="i" type="text">
+            </div>
+            <button type="button" (click)="addHighlights()">Add work highlight</button>
+        </div>
+        <button type="submit" (click)="updateForm()">Next</button>
+    </form>
 </div>

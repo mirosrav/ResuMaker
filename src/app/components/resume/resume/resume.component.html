@@ -7,10 +7,10 @@
             </div>
             <div class="d-flex justify-content-center">
                 <ul class="list-group list-group-horizontal" style="list-style: none;">
-                    <li class="px-1">{{resumeService.headerFormData()?.contact.location || savedHeaderData?.contact.location}}</li>
-                    <li class="px-1">&#x2022;<span class="px-1" ></span>{{resumeService.headerFormData()?.contact.email || savedHeaderData?.contact.email}}</li>
-                    <li class="px-1">&#x2022;<span class="px-1"></span>{{resumeService.headerFormData()?.contact.phone || savedHeaderData?.contact.phone}}</li>
-                    <li class="px-1">&#x2022;<span class="px-1"></span>{{resumeService.headerFormData()?.contact.site || savedHeaderData?.contact.site}}</li>
+                    <li class="px-1">{{resumeService.headerFormData()?.contact?.location || savedHeaderData?.contact?.location ? resumeService.headerFormData()?.contact?.location || savedHeaderData?.contact?.location : ''}}</li>
+                    <li class="px-1">{{resumeService.headerFormData()?.contact?.email || savedHeaderData?.contact?.email ? ' • ' + resumeService.headerFormData()?.contact?.email || savedHeaderData?.contact?.email : ''}}</li>
+                    <li class="px-1">{{resumeService.headerFormData()?.contact?.phone || savedHeaderData?.contact?.phone ? ' • ' + resumeService.headerFormData()?.contact?.phone || savedHeaderData?.contact?.phone : ''}}</li>
+                    <li class="px-1">{{resumeService.headerFormData()?.contact?.site || savedHeaderData?.contact?.site ? ' • ' + resumeService.headerFormData()?.contact?.site || savedHeaderData?.contact?.site : ''}}</li>
                 </ul>
             </div>
         </div>
@@ -34,7 +34,7 @@
             <div>
               <div class="row">
                   <div class="col-6 text-start" style="font-weight: bold;">
-                      <div>Carsome</div>
+                      <div>{{resumeService.experienceFormData().company}}</div>
                       <div>CEO & Founder</div>
                   </div>
                   <div class="col-6 text-end">
@@ -43,19 +43,10 @@
                   </div>
               </div>
               <div class="row">
-                  <div>
+                  <div >
                       <ul>
-                          <li>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                          </li>
-                          <li>
-                              Sed vestibulum urna eget nisi pharetra sodales.
-                          </li>
-                          <li>
-                              Cras in tellus sit amet metus lobortis vehicula et ut dolor.
-                          </li>
-                          <li>
-                              Maecenas nec dolor in turpis sollicitudin commodo quis ac ipsum
+                          <li *ngFor="let x of savedHLData">
+                              {{x.expHighlight}}
                           </li>
                       </ul>
                   </div>
@@ -102,7 +93,7 @@
     
 </div>
 
-<button class="noclick" (click)="downloadPdf()"></button>
+<button class="noclick" (click)="downloadPdf()">Generate Resume</button>
 
 <!-- <div class="container p-3">
     <app-header [headerData]="nameFromParent"></app-header>

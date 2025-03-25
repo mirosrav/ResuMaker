@@ -1,5 +1,5 @@
 import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 // import { EventEmitter } from 'stream';
 import { SharedServiceService } from '../../services/sharedService.service';
 import { __values } from 'tslib';
@@ -12,50 +12,44 @@ import { __values } from 'tslib';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit{
+  isHeaderVisible = true;
   @Output() next = new EventEmitter<void>();
-  @Output() prev = new EventEmitter<void>();
-  @Output() resumeSummaryData = new EventEmitter<any>();
-
-  constructor(private summaryService: SharedServiceService){
-    // this.summaryForm.valueChanges.subscribe(value =>{
-    //   this.resumeSummaryData.emit(value);
-    // })
+  headerStorageData = JSON.parse(localStorage.getItem('headerData') || '{}');
+  constructor(private headerData: SharedServiceService){
 
   }
 
   ngOnInit(){
-    const savedData = this.summaryService.summaryFormData();
+    const savedData = this.headerData.headerFormData();
     if(savedData){
-      this.summaryForm.patchValue(savedData);
+      this.resumeForm.patchValue(savedData);
     }
 
-    this.summaryForm.valueChanges.subscribe((newData2)=>{
-      this.summaryService.updateSummaryForm(newData2);
-    })  
+    this.resumeForm.valueChanges.subscribe((newData)=>{
+      this.headerData.updateHeaderPreview(newData);
+    })
   }
 
-
-  summaryForm = new FormGroup({
-    summary: new FormControl('')
+  resumeForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    contact: new FormGroup({
+      location: new FormControl(''),
+      email: new FormControl(''),
+      phone: new FormControl(''),
+      site: new FormControl(''),
+    }),
   })
 
-  onSubmit(){
-    this.next.emit();
-    // this.addData();
+  updateForm(e:Event){
+    e.preventDefault();
+    this.headerData.updateHeaderForm(this.resumeForm.value);
+    this.proceed();
   }
 
   proceed(){
-    this.summaryService.nextStep();
+    this.headerData.nextStep();
   }
-
-  goBack() {
-    this.summaryService.prevStep();
-  }
-  // addData(){
-  //   if(this.summaryData.formData.length === 0){
-  //     this.summaryData.formData.push(this.summaryForm.value);
-  //   }else{
-  //     this.summaryData.formData[0] = this.summaryForm.value;
-  //   }
-  // }
 }  
+
+

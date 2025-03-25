@@ -1,10 +1,8 @@
-<div class="container" style="border-bottom: solid 1px;">
-    <div class="my-3">
-        <div class="row ">
-            <h3 class="d-flex justify-content-center">PROFESSIONAL SUMMARY</h3>
-        </div>
-        <div class="d-flex justify-content-center">
-            <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-        </div>
-    </div>
+<div>
+    <form [formGroup]="summaryForm">
+        <div><p><label for="summary">Summary</label></p></div>
+        <div><textarea type="text" rows="4" cols="100" formControlName="summary" [placeholder]="summaryData?.summary || 'Enter your experience summary'"></textarea></div>
+        <button (click)="goBack()">back</button>
+        <button (click)="proceed()">next</button>
+    </form>
 </div>

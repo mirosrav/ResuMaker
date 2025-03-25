@@ -6,8 +6,10 @@ import { single } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedServiceService {
-  headerFormData = signal(this.loadFromLocalStorage('personal'));
-  summaryFormData = signal(this.loadFromLocalStorage('summary'));
+  headerFormData = signal(this.loadFromLocalStorage('headerData'));
+  summaryFormData = signal(this.loadFromLocalStorage('summaryData'));
+  experienceFormData = signal(this.loadFromLocalStorage('expData'));
+
   currentStep = signal(0);
 
   constructor(){
@@ -35,18 +37,41 @@ export class SharedServiceService {
     return localStorage.getItem('headerFormData');
   }
 
+  updateHeaderPreview(newData:any){
+    this.headerFormData.set(newData);
+  }
+
+  updateSummaryPreview(newData:any){
+    this.summaryFormData.set(newData);
+  }
+
+  updateExpPreview(newData:any){
+    this.experienceFormData.set(newData);
+  }
+    
   updateHeaderForm(newData:any){
     this.headerFormData.set(newData);
-    localStorage.setItem('headerFormData', JSON.stringify(newData));//convert data from object to string
+    if(!localStorage.getItem('headerData')){
+      this.headerFormData.set(newData);
+    }else{
+      console.log('data already exists');
+    }
+
+    localStorage.setItem('headerData', JSON.stringify(newData));//convert data from object to string
   }
 
   updateSummaryForm(newData:any){
     this.summaryFormData.set(newData);
-    localStorage.setItem('summaryFormData', JSON.stringify(newData));//convert data from object to string
+    localStorage.setItem('summaryData', JSON.stringify(newData));//convert data from object to string
+  }
+
+  updateExpForm(newData:any){
+    this.experienceFormData.set(newData);
+    localStorage.setItem('expData', JSON.stringify(newData));
   }
 
   private loadFromLocalStorage(key:string){
-    const savedData = localStorage.getItem('resumeData');
+    const savedData = localStorage.getItem(key);
     return savedData ? JSON.parse(savedData) : null;//convert data from string to json object
   }
 

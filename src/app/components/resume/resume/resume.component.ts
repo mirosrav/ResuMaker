@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChi
 import { SharedServiceService } from '../../../services/sharedService.service';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { CommonModule } from '@angular/common';
 // import { HeaderComponent } from "../../header/header.component";
 // import { SummaryComponent } from "../../summary/summary.component";
 // import { ExperienceComponent } from "../../experience/experience.component";
@@ -14,20 +15,22 @@ import jsPDF from 'jspdf';
 @Component({
   selector: 'app-resume',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './resume.component.html',
   styleUrl: './resume.component.css'
 })
 export class ResumeComponent implements OnInit{
   @ViewChild('resumePreview') resumePreview!: ElementRef;//get the div with the related id
 
-  savedHeaderData = JSON.parse(localStorage.getItem('headerFormData') || '{}');
-  savedSummaryData = JSON.parse(localStorage.getItem('summaryFormData') || '{}');
+  savedHeaderData = JSON.parse(localStorage.getItem('headerData') || '{}');
+  savedSummaryData = JSON.parse(localStorage.getItem('summaryData') || '{}');
+  savedExpData = JSON.parse(localStorage.getItem('expData') || '{}');
+savedHLData = Array.isArray(this.savedExpData.highlights) ? this.savedExpData.highlights : [];
   resumeDatas:any;
   @Input() data: any;
 
   constructor(public resumeService:SharedServiceService){
-    console.log(this.savedHeaderData);
+    console.log(this.savedExpData);
   }
 
 ngOnInit(){

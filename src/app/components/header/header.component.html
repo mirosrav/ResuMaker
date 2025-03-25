@@ -13,11 +13,32 @@
         </div>
     </div>
 </div> -->
-<div>
-    <form [formGroup]="summaryForm">
-        <label for="summary">Summary</label>
-        <input type="text" formControlName="summary" />
-        <button (click)="goBack()">back</button>
-        <button (click)="proceed()">next</button>
+
+
+<div [style.display]="isHeaderVisible ?'block' : 'none' ">
+    <form class="form-control" [formGroup]="resumeForm">
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="text" name="firstName" id="" formControlName="firstName" [placeholder]="headerStorageData?.firstName || 'Enter first name'" >
+            <label for="lastName">Last Name:</label>
+            <input type="text" name="lastname" id="" formControlName="lastName" [placeholder]="headerStorageData?.lastName || 'Enter last name'">
+        </div>
+       <div formGroupName="contact">
+            <div>
+                <label for="location">Location:</label>
+                <input type="text" name="location" id="" formControlName="location" [placeholder]="headerStorageData?.contact?.location || 'Enter location'">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="" formControlName="email" [placeholder]="headerStorageData?.contact?.email || 'Enter email'">
+            </div>
+            <div>
+                <label for="phone">Phone:</label>
+                <input type="text" name="phone" id="" formControlName="phone" [placeholder]="headerStorageData?.contact?.phone || 'Enter phone number'">
+            </div>
+            <div>
+                <label for="site">Site:</label>
+                <input type="text" name="site" id="" formControlName="site" [placeholder]="headerStorageData?.contact?.site || 'Enter website'">
+            </div>
+        </div>
+        <button type="submit" (click)="updateForm($event)">Next</button>
     </form>
 </div>

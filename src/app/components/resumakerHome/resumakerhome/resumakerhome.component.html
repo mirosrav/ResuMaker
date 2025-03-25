@@ -4,8 +4,10 @@
             <!-- <app-resumeform (next)="nextStep()" *ngIf="currentStep === 0" (resumeHeaderData)="handleFormSubmit($event)"></app-resumeform> -->
             <!-- <app-resumeform *ngIf="currentStep === 0" (resumeHeaderData)="handleFormSubmit($event)"></app-resumeform> -->
             <!-- <app-header *ngIf="currentStep === 1" (next)="nextStep()" (prev)="prevStep()" (resumeSummaryData)="handleFormSubmit($event)"></app-header> -->
-            <app-resumeform *ngIf="resumeService.currentStep() === 0"></app-resumeform>
-            <app-header *ngIf="resumeService.currentStep() === 1"></app-header>
+            <!-- <app-resumeform *ngIf="resumeService.currentStep() === 0"></app-resumeform> -->
+            <app-header *ngIf="resumeService.currentStep() === 0"></app-header>
+            <app-summary *ngIf="resumeService.currentStep() === 1"></app-summary>
+            <app-experience-list *ngIf="resumeService.currentStep() === 0"></app-experience-list>
         </div>
         <div class="col-6">
             <app-resume [data]="formData"></app-resume>
