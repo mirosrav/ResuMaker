@@ -34,12 +34,12 @@
             <div>
               <div class="row">
                   <div class="col-6 text-start" style="font-weight: bold;">
-                      <div>{{resumeService.experienceFormData().company}}</div>
-                      <div>CEO & Founder</div>
+                      <div>{{resumeService.experienceFormData()?.company ? resumeService.experienceFormData()?.company : 'Your previous company name'}}</div>
+                      <div>{{resumeService.experienceFormData()?.designation ? resumeService.experienceFormData()?.designation : 'Your previous designation at this company'}}</div>
                   </div>
                   <div class="col-6 text-end">
-                      <div>August 2015 - Present</div>
-                      <div>Pyeongyang, N.K</div>
+                      <div>{{resumeService.experienceFormData()?.date ? resumeService.experienceFormData()?.date : 'Date commence'}}</div>
+                      <div>{{resumeService.experienceFormData()?.compLocation ? resumeService.experienceFormData()?.compLocation : 'Company Location'}}</div>
                   </div>
               </div>
               <div class="row">

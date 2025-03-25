@@ -3,14 +3,21 @@
         <div>
             <label for="company">Company Name :</label>
             <input type="text" name="company" formControlName="company">
+            <label for="designation">Designation :</label>
+            <input type="text" name="designation" formControlName="designation">
+            <label for="date">Commence Date :</label>
+            <input type="text" name="date" formControlName="date">
+            <label for="location">Location :</label>
+            <input type="text" name="location" formControlName="compLocation">
         </div>
         <div formArrayName="expHighlight">
             <label for="experience">Experience</label>
 
             <div *ngFor="let highlight of expHighlight.controls; let i = index">
                 <input [formControlName]="i" type="text">
+                <button type="button" (click)="addHighlights()">Add work highlight</button>
             </div>
-            <button type="button" (click)="addHighlights()">Add work highlight</button>
+           
         </div>
         <button type="submit" (click)="updateForm()">Next</button>
     </form>

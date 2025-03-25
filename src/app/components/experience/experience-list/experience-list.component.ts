@@ -28,7 +28,7 @@ export class ExperienceListComponent implements OnInit{
     date: new FormControl(''),
     compLocation: new FormControl(''),
     expHighlight : new FormArray([
-      new FormControl('')
+      new FormControl()
     ])
   })
 
