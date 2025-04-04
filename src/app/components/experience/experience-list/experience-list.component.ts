@@ -20,6 +20,7 @@ export class ExperienceListComponent implements OnInit{
     this.experienceForm.valueChanges.subscribe((newData)=>{
       this.expData.updateExpPreview(newData)
     })
+
   }
 
   experienceForm = new FormGroup({

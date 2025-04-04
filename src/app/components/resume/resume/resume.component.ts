@@ -26,11 +26,15 @@ export class ResumeComponent implements OnInit{
   savedSummaryData = JSON.parse(localStorage.getItem('summaryData') || '{}');
   savedExpData = JSON.parse(localStorage.getItem('expData') || '{}');
   savedHLData = Array.isArray(this.savedExpData.expHighlight) ? this.savedExpData.expHighlight : [];
+  hldata = (()=>{
+    return this.resumeService.experienceFormData()?.expHighlight;
+  })
+
   resumeDatas:any;
   @Input() data: any;
 
   constructor(public resumeService:SharedServiceService){
-    console.log(this.savedHLData);
+    console.log(this.hldata());
   }
 
 ngOnInit(){
