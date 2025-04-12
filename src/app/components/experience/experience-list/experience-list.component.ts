@@ -15,33 +15,55 @@ export class ExperienceListComponent implements OnInit{
 
   constructor(private expData:SharedServiceService){}
 
-  ngOnInit(){
-
-    this.experienceForm.valueChanges.subscribe((newData)=>{
-      this.expData.updateExpPreview(newData)
-    })
-
+  ngOnInit() {
+    const savedData = this.expStorageData;
+    if(savedData?.experiences?.length){
+      savedData.experiences.forEach((exp:any) => {
+        this.experiences.push(this.createExperienceList(exp));
+      });
+    }else{
+      this.experiences.push(this.createExperienceList());
+    }
+    
+  
+    this.experienceListForm.valueChanges.subscribe((newData) => {
+      this.expData.updateExpPreview(newData);
+    });
   }
-
-  experienceForm = new FormGroup({
-    company:new FormControl(''),
-    designation:new FormControl(''),
-    date: new FormControl(''),
-    compLocation: new FormControl(''),
-    expHighlight : new FormArray([
-      new FormControl()
-    ])
+  experienceListForm = new FormGroup({
+    experiences: new FormArray([])
   })
 
-  get expHighlight() {
-    return this.experienceForm.get('expHighlight') as FormArray;
-  }
-  updateForm(){
-    this.expData.updateExpForm(this.experienceForm.value);
-    console.log(this.experienceForm.value)
+  createExperienceList(data?:any):FormGroup{
+    return new FormGroup({
+      company:new FormControl(data?.company || ''),
+      designation:new FormControl(data?.designation || ''),
+      date: new FormControl(data?.date || ''),
+      compLocation: new FormControl(data?.compLocation || ''),
+      expHighlight : new FormArray(
+        (data?.expHighlight?.length ? data.expHighlight : ['']).map(
+          (hl:string) => new FormControl(hl)
+        ))
+    });
   }
 
-  addHighlights(){
-    this.expHighlight.push(new FormControl(''));
+  get experiences():FormArray{
+    return this.experienceListForm.get('experiences') as FormArray;//get formArray experiences
+  }
+
+  getHighlights(index:number):FormArray{
+    return this.experiences.at(index).get('expHighlight') as FormArray;//get formArray highlight
+  }
+
+  addHighlight(index:number){
+    this.getHighlights(index).push(new FormControl(''));
+  }
+
+  addExperience(){
+    this.experiences?.push(this.createExperienceList());
+  }
+
+  updateExperience(){
+    this.expData.updateExpForm(this.experienceListForm.value);
   }
 }

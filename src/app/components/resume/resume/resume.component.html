@@ -32,16 +32,46 @@
           </div>
           <div>
             <div>
-              <div class="row">
-                  <div class="col-6 text-start" style="font-weight: bold;">
-                      <div>{{resumeService.experienceFormData()?.company ? resumeService.experienceFormData()?.company : 'Your previous company name'}}</div>
-                      <div>{{resumeService.experienceFormData()?.designation ? resumeService.experienceFormData()?.designation : 'Your previous designation at this company'}}</div>
-                  </div>
-                  <div class="col-6 text-end">
-                      <div>{{resumeService.experienceFormData()?.date ? resumeService.experienceFormData()?.date : 'Date commence'}}</div>
-                      <div>{{resumeService.experienceFormData()?.compLocation ? resumeService.experienceFormData()?.compLocation : 'Company Location'}}</div>
-                  </div>
-              </div>
+                <ng-container *ngIf="resumeService.experienceFormData()?.experiences?.length; else placeholder">
+                    <div class="row" *ngFor="let exp of experienceData?.experiences">
+                        <div class="col-6 text-start" style="font-weight: bold;">
+                            <div >{{exp.company || savedExpData.company || 'Your previous company name'}}</div>
+                            <div>{{exp.designation || 'Your designation'}}</div>
+                        </div>
+                        <div class="col-6 text-end">
+                            <div>{{exp.date || 'Date for this experience'}}</div>
+                            <div>{{exp.compLocation || 'Location for this experience'}}</div>
+                        </div>
+                        <ul>
+                            <li *ngFor="let highlight of exp.expHighlight">{{highlight || 'List of work highlights'}}</li>
+                        </ul>
+                    </div>
+                </ng-container>
+                <ng-template #placeholder>
+                    <div class="row">
+                        <div class="col-6 text-start" style="font-weight: bold;">
+                            <div>
+                                Your previous company name
+                            </div>
+                            <div>
+                                Your Designation
+                            </div>
+                        </div>
+                        <div class="col-6 text-end" >
+                            <div>
+                                Date for this experience
+                            </div>
+                            <div>
+                                Location for this experience
+                            </div>
+                        </div>
+                        <ul>
+                            <li>
+                                List of work highlights
+                            </li>
+                        </ul>
+                    </div>
+                </ng-template>
               <div class="row">
                   <div >
                       <ul>

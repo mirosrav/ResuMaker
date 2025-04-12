@@ -13,6 +13,7 @@ export class SharedServiceService {
   currentStep = signal(0);
 
   constructor(){
+    
   }
 
   // formData:any[]=[];
@@ -31,6 +32,7 @@ export class SharedServiceService {
     // console.log(this.formData());
   // }
 
+  
   getFormData(){
     // console.log(this.formData);
     // return this.formData;

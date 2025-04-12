@@ -1,24 +1,35 @@
 <div>
-    <form [formGroup]="experienceForm">
-        <div>
-            <label for="company">Company Name :</label>
-            <input type="text" name="company" formControlName="company">
-            <label for="designation">Designation :</label>
-            <input type="text" name="designation" formControlName="designation">
-            <label for="date">Commence Date :</label>
-            <input type="text" name="date" formControlName="date">
-            <label for="location">Location :</label>
-            <input type="text" name="location" formControlName="compLocation">
-        </div>
-        <div formArrayName="expHighlight">
-            <label for="experience">Experience</label>
-
-            <div *ngFor="let highlight of expHighlight.controls; let i = index">
-                <input [formControlName]="i" type="text">
-                <button type="button" (click)="addHighlights()">Add work highlight</button>
+    <form [formGroup]="experienceListForm">
+      <div formArrayName="experiences">
+        <div *ngFor="let expGroup of experiences.controls; let i = index" [formGroupName]="i">
+          
+          <label>Company Name:</label>
+          <input type="text" formControlName="company" >
+  
+          <label>Designation:</label>
+          <input type="text" formControlName="designation">
+  
+          <label>Commence Date:</label>
+          <input type="text" formControlName="date">
+  
+          <label>Location:</label>
+          <input type="text" formControlName="compLocation">
+  
+          <!-- Highlights -->
+        
+          <div formArrayName="expHighlight">
+            
+            <div *ngFor="let hl of getHighlights(i)?.controls; let j = index">
+                <label>Experience Highlight</label>
+                <input type="text" [formControlName]="j" >
             </div>
-           
+            <button type="button" (click)="addHighlight(i)">Add Work Highlight</button>
+          </div>
         </div>
-        <button type="submit" (click)="updateForm()">Next</button>
+      </div>
+      <button type="button" (click)="addExperience()">Add Experience</button>
+      <button (click)="updateExperience()">Update Form</button>
+      
     </form>
-</div>
+  </div>
+  

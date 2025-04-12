@@ -30,11 +30,17 @@ export class ResumeComponent implements OnInit{
     return this.resumeService.experienceFormData()?.expHighlight;
   })
 
+  
+
   resumeDatas:any;
   @Input() data: any;
 
   constructor(public resumeService:SharedServiceService){
-    console.log(this.hldata());
+
+  }
+
+  get experienceData(){
+    return this.resumeService.experienceFormData();
   }
 
 ngOnInit(){
