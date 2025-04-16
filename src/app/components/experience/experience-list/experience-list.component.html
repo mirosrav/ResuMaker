@@ -4,7 +4,7 @@
         <div *ngFor="let expGroup of experiences.controls; let i = index" [formGroupName]="i"  style="border: 1px solid red; padding: 10px; margin-bottom: 5px;">
           
           <label>Company Name:</label>
-          <input type="text" formControlName="company" >
+          <input type="text" formControlName="company" required>
   
           <label>Designation:</label>
           <input type="text" formControlName="designation">
@@ -32,7 +32,7 @@
         </div>
       </div>
       <button type="button" (click)="addExperience()">Add Experience</button>
-      <button (click)="updateExperience()">Update Form</button>
+      <button (click)="updateExperience()" [disabled]="experiences.invalid">Update Form</button>
       
     </form>
   </div>

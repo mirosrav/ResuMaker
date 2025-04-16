@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SharedServiceService } from '../../../services/sharedService.service';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +13,8 @@ import { CommonModule } from '@angular/common';
 export class ExperienceListComponent implements OnInit{
   expStorageData =  JSON.parse(localStorage.getItem('expData') || '{}');
 
-  constructor(private expData:SharedServiceService){}
+  constructor(private expData:SharedServiceService){
+  }
 
   ngOnInit() {
     const savedData = this.expStorageData;
@@ -30,19 +31,21 @@ export class ExperienceListComponent implements OnInit{
       this.expData.updateExpPreview(newData);
     });
   }
+
+
   experienceListForm = new FormGroup({
     experiences: new FormArray([])
   })
 
   createExperienceList(data?:any):FormGroup{
     return new FormGroup({
-      company:new FormControl(data?.company || ''),
-      designation:new FormControl(data?.designation || ''),
-      date: new FormControl(data?.date || ''),
-      compLocation: new FormControl(data?.compLocation || ''),
+      company:new FormControl(data?.company || '', Validators.required),
+      designation:new FormControl(data?.designation || '', Validators.required),
+      date: new FormControl(data?.date || '', Validators.required),
+      compLocation: new FormControl(data?.compLocation || '', Validators.required),
       expHighlight : new FormArray(
         (data?.expHighlight?.length ? data.expHighlight : ['']).map(
-          (hl:string) => new FormControl(hl)
+          (hl:string) => new FormControl(hl, Validators.required)
         ))
     });
   }
@@ -77,4 +80,5 @@ export class ExperienceListComponent implements OnInit{
   deleteExperience(index:number){
     this.experiences.removeAt(index);
   }
+
 }
