@@ -66,4 +66,15 @@ export class ExperienceListComponent implements OnInit{
   updateExperience(){
     this.expData.updateExpForm(this.experienceListForm.value);
   }
+
+  deleteHighlight(index:number,highlightIndex:number){
+    const confirmed = confirm("Are you sure to delete this work highlight?")
+    if(confirmed){
+      this.getHighlights(index).removeAt(highlightIndex);
+    }
+  }
+
+  deleteExperience(index:number){
+    this.experiences.removeAt(index);
+  }
 }

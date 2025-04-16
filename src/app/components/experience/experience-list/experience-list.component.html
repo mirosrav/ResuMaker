@@ -1,7 +1,7 @@
 <div>
     <form [formGroup]="experienceListForm">
-      <div formArrayName="experiences">
-        <div *ngFor="let expGroup of experiences.controls; let i = index" [formGroupName]="i">
+      <div formArrayName="experiences" >
+        <div *ngFor="let expGroup of experiences.controls; let i = index" [formGroupName]="i"  style="border: 1px solid red; padding: 10px; margin-bottom: 5px;">
           
           <label>Company Name:</label>
           <input type="text" formControlName="company" >
@@ -19,11 +19,15 @@
         
           <div formArrayName="expHighlight">
             
-            <div *ngFor="let hl of getHighlights(i)?.controls; let j = index">
-                <label>Experience Highlight</label>
-                <input type="text" [formControlName]="j" >
-            </div>
+              <div class="d-flex flex-column gap-2">
+                <div *ngFor="let hl of getHighlights(i)?.controls; let j = index">
+                    <label>Experience Highlight</label>
+                    <input type="text" [formControlName]="j" >
+                    <button type="button" (click)="deleteHighlight(i,j)" [disabled]="getHighlights(i).length === 1">Delete this work highlight</button>
+                </div>
+              </div>
             <button type="button" (click)="addHighlight(i)">Add Work Highlight</button>
+            <button type="button" (click)="deleteExperience(i)" [disabled]="experiences.length === 1">Delete this experience</button>
           </div>
         </div>
       </div>

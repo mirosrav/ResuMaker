@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { effect, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { single } from 'rxjs';
 
 @Injectable({
@@ -13,7 +13,9 @@ export class SharedServiceService {
   currentStep = signal(0);
 
   constructor(){
-    
+    effect(()=>{//untuk tahu bila signal berubah.
+      console.log(this.currentStep());
+    })
   }
 
   // formData:any[]=[];
