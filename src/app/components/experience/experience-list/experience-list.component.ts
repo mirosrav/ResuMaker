@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SharedServiceService } from '../../../services/sharedService.service';
 import { CommonModule } from '@angular/common';
+import { FormErrorComponent } from '../../../shared/form-error/form-error.component';
 
 @Component({
   selector: 'app-experience-list',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormErrorComponent],
   templateUrl: './experience-list.component.html',
   styleUrl: './experience-list.component.css'
 })
@@ -68,6 +69,7 @@ export class ExperienceListComponent implements OnInit{
 
   updateExperience(){
     this.expData.updateExpForm(this.experienceListForm.value);
+    this.expData.nextStep();
   }
 
   deleteHighlight(index:number,highlightIndex:number){

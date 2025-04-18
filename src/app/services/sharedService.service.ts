@@ -9,6 +9,7 @@ export class SharedServiceService {
   headerFormData = signal(this.loadFromLocalStorage('headerData'));
   summaryFormData = signal(this.loadFromLocalStorage('summaryData'));
   experienceFormData = signal(this.loadFromLocalStorage('expData'));
+  educationFormData = signal(this.loadFromLocalStorage('eduData'));
 
   currentStep = signal(0);
 
@@ -52,6 +53,10 @@ export class SharedServiceService {
   updateExpPreview(newData:any){
     this.experienceFormData.set(newData);
   }
+
+  updateEduPreview(newData:any){
+    this.educationFormData.set(newData);
+  }
     
   updateHeaderForm(newData:any){
     this.headerFormData.set(newData);
@@ -66,12 +71,17 @@ export class SharedServiceService {
 
   updateSummaryForm(newData:any){
     this.summaryFormData.set(newData);
-    localStorage.setItem('summaryData', JSON.stringify(newData));//convert data from object to string
+    localStorage.setItem('summaryData', JSON.stringify(newData));
   }
 
   updateExpForm(newData:any){
     this.experienceFormData.set(newData);
     localStorage.setItem('expData', JSON.stringify(newData));
+  }
+
+  updateEduForm(newData:any){
+    this.educationFormData.set(newData);
+    localStorage.setItem('eduData',JSON.stringify(newData));
   }
 
   private loadFromLocalStorage(key:string){

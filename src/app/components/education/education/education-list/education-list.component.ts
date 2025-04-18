@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './education-list.component.css'
 })
 export class EducationListComponent {
+  
 
 }

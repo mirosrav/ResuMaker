@@ -5,16 +5,20 @@
           
           <div style="margin-bottom: 15px;">
             <label>Company Name:</label>
-            <input type="text" formControlName="company" required>
+            <input type="text" formControlName="company">
+            <div><app-form-error [control]="expGroup.get('company')"></app-form-error></div>
     
             <label>Designation:</label>
             <input type="text" formControlName="designation">
+            <div><app-form-error [control]="expGroup.get('designation')"></app-form-error></div>
     
             <label>Commence Date:</label>
             <input type="text" formControlName="date">
+            <div><app-form-error [control]="expGroup.get('date')"></app-form-error></div>
     
             <label>Location:</label>
             <input type="text" formControlName="compLocation">
+            <div><app-form-error [control]="expGroup.get('compLocation')"></app-form-error></div>
           </div>
   
           <!-- Highlights -->
@@ -34,7 +38,7 @@
         </div>
       </div>
       <button type="button" (click)="addExperience()">Add Experience</button>
-      <button (click)="updateExperience()" [disabled]="experiences.invalid">Update Form</button>
+      <button (click)="updateExperience()">Update Form</button>
       
     </form>
   </div>

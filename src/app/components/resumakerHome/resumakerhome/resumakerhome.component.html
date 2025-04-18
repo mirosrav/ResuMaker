@@ -8,6 +8,7 @@
             <app-header *ngIf="resumeService.currentStep() === 0"></app-header>
             <app-summary *ngIf="resumeService.currentStep() === 1"></app-summary>
             <app-experience-list *ngIf="resumeService.currentStep() === 0"></app-experience-list>
+            <app-education *ngIf="resumeService.currentStep() === 0"></app-education>
         </div>
         <div class="col-6">
             <app-resume [data]="formData"></app-resume>

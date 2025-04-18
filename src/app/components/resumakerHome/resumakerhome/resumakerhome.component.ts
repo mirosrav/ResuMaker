@@ -11,7 +11,7 @@ import { ExperienceListComponent } from "../../experience/experience-list/experi
 @Component({
   selector: 'app-resumakerhome',
   standalone: true,
-  imports: [ResumeComponent, CommonModule, HeaderComponent, SummaryComponent, ExperienceListComponent],
+  imports: [ResumeComponent, CommonModule, HeaderComponent, SummaryComponent, ExperienceListComponent, EducationComponent],
   templateUrl: './resumakerhome.component.html',
   styleUrl: './resumakerhome.component.css'
 })
