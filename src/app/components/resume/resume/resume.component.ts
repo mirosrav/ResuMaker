@@ -29,6 +29,7 @@ export class ResumeComponent implements OnInit{
   hldata = (()=>{
     return this.resumeService.experienceFormData()?.expHighlight;
   })
+  savedEduData = JSON.parse(localStorage.getItem('eduData')|| '{}');
 
   
 
@@ -41,6 +42,10 @@ export class ResumeComponent implements OnInit{
 
   get experienceData(){
     return this.resumeService.experienceFormData();
+  }
+
+  get educationData(){
+    return this.resumeService.educationFormData();
   }
 
 ngOnInit(){

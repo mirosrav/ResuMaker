@@ -15,30 +15,35 @@
 </div> -->
 
 
-<div [style.display]="isHeaderVisible ?'block' : 'none' ">
-    <form class="form-control" [formGroup]="resumeForm">
-        <div>
-            <label for="firstName">First Name:</label>
-            <input type="text" name="firstName" id="" formControlName="firstName" [placeholder]="headerStorageData?.firstName || 'Enter first name'" >
-            <label for="lastName">Last Name:</label>
-            <input type="text" name="lastname" id="" formControlName="lastName" [placeholder]="headerStorageData?.lastName || 'Enter last name'">
+<div class="container">
+    <div class="row ">
+        <div class="d-flex align-items-center">
+            <form class="form-control " [formGroup]="resumeForm">
+                <h3>Header</h3>
+                <div>
+                    <label for="firstName">First Name</label>
+                    <input class="form-control" type="text" name="firstName" id="" formControlName="firstName" [placeholder]="headerStorageData?.firstName || 'Enter first name'" >
+                    <label for="lastName">Last Name</label>
+                    <input class="form-control" type="text" name="lastname" id="" formControlName="lastName" [placeholder]="headerStorageData?.lastName || 'Enter last name'">
+                </div>
+               <div formGroupName="contact">
+                    <div>
+                        <label for="location">Location:</label>
+                        <input class="form-control" class="form-control" type="text" name="location" id="" formControlName="location" [placeholder]="headerStorageData?.contact?.location || 'Enter location'">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" name="email" id="" formControlName="email" [placeholder]="headerStorageData?.contact?.email || 'Enter email'">
+                    </div>
+                    <div>
+                        <label for="phone">Phone</label>
+                        <input class="form-control" type="text" name="phone" id="" formControlName="phone" [placeholder]="headerStorageData?.contact?.phone || 'Enter phone number'">
+                    </div>
+                    <div>
+                        <label for="site">Site</label>
+                        <input class="form-control" type="text" name="site" id="" formControlName="site" [placeholder]="headerStorageData?.contact?.site || 'Enter website'">
+                    </div>
+                </div>
+                <button type="submit" (click)="updateForm($event)">Next</button>
+            </form>
         </div>
-       <div formGroupName="contact">
-            <div>
-                <label for="location">Location:</label>
-                <input type="text" name="location" id="" formControlName="location" [placeholder]="headerStorageData?.contact?.location || 'Enter location'">
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="" formControlName="email" [placeholder]="headerStorageData?.contact?.email || 'Enter email'">
-            </div>
-            <div>
-                <label for="phone">Phone:</label>
-                <input type="text" name="phone" id="" formControlName="phone" [placeholder]="headerStorageData?.contact?.phone || 'Enter phone number'">
-            </div>
-            <div>
-                <label for="site">Site:</label>
-                <input type="text" name="site" id="" formControlName="site" [placeholder]="headerStorageData?.contact?.site || 'Enter website'">
-            </div>
-        </div>
-        <button type="submit" (click)="updateForm($event)">Next</button>
-    </form>
+    </div>
 </div>

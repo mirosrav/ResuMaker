@@ -3,7 +3,7 @@
       <div class="container" style="border-bottom: solid 1px;">
         <div class="mb-3">
             <div class="row">
-                <h3 class="d-flex justify-content-center" style="height: 40px; background-color: black; color: white;">{{resumeService.headerFormData()?.firstName  || savedHeaderData.firstName}} {{resumeService.headerFormData()?.lastName || savedHeaderData.lastName}}</h3><!-- data daripada service instead of own component-->
+                <h4 class="d-flex justify-content-center align-items-center" style="height: 40px; background-color: black; color: white;">{{resumeService.headerFormData()?.firstName  || savedHeaderData.firstName}} {{resumeService.headerFormData()?.lastName || savedHeaderData.lastName}}</h4><!-- data daripada service instead of own component-->
             </div>
             <div class="d-flex justify-content-center">
                 <ul class="list-group list-group-horizontal" style="list-style: none;">
@@ -18,7 +18,7 @@
     <div class="container" style="border-bottom: solid 1px;">
       <div class="my-3">
           <div class="row ">
-              <h3 class="d-flex justify-content-center">PROFESSIONAL SUMMARY</h3>
+              <h4 class="d-flex justify-content-center">PROFESSIONAL SUMMARY</h4>
           </div>
           <div class="d-flex justify-content-center">
               <p style="text-align: center;">{{resumeService.summaryFormData()?.summary}}</p>
@@ -28,9 +28,9 @@
     <div class="container" style="border-bottom: solid 1px;">
       <div class="my-3">
           <div class="row ">
-              <h3 class="d-flex justify-content-center">PROFESSIONAL EXPERIENCE</h3>
+              <h4 class="d-flex justify-content-center">PROFESSIONAL EXPERIENCE</h4>
           </div>
-          <div>
+        
             <div>
                 <ng-container *ngIf="resumeService.experienceFormData()?.experiences?.length; else placeholder">
                     <div class="row" *ngFor="let exp of experienceData?.experiences">
@@ -82,35 +82,52 @@
                   </div>
               </div>
           </div>
-          
-          </div>
       </div>
     </div>
     <div class="container" style="border-bottom: solid 1px;">
       <div class="my-3">
           <div class="row ">
-              <h3 class="d-flex justify-content-center">EDUCATION</h3>
+              <h4 class="d-flex justify-content-center">EDUCATION</h4>
           </div>
           <div>
-            <div>
-              <div class="row">
-                  <div class="col-6 text-start">
-                      <div style="font-weight: bold;">Bachelor of Computer Science, Computer Network & Security</div>
-                      <div>Universiti Teknologi Malaysia, Skudai, Johor Bahru</div>
-                  </div>
-                  <div class="col-6 text-end">
-                      <div>August 2015 - August 2020</div>
-                  </div>
-              </div>
-          </div>
-          
-          </div>
+            <ng-container *ngIf="resumeService.educationFormData()?.educations?.length; else placeholder2">
+                <div class="row" *ngFor="let edu of educationData?.educations">
+                    <div class="col-6 text-start" style="font-weight: bold;">
+                        <div >{{edu.title || savedEduData.title || 'Your previous institution name'}}</div>
+                    </div>
+                    <div class="col-6 text-end">
+                        <div>{{edu.date || 'Date for this experience'}}</div>
+                    </div>
+                    <div>
+                        {{edu.institute || 'Your previous institution name'}}
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #placeholder2>
+                <div class="row">
+                    <div class="col-6 text-start" style="font-weight: bold;">
+                        <div>
+                            Your previous institution name
+                        </div>
+                    </div>
+                    <div class="col-6 text-end" >
+                        <div>
+                            Date for this experience
+                        </div>
+
+                    </div>
+                    <div>
+                        Your previous institution name
+                    </div>
+                </div>
+            </ng-template>
+      </div>
       </div>
     </div>
     <div class="container" style="border-bottom: solid 1px;">
       <div class="my-3">
           <div class="row ">
-              <h3 class="d-flex justify-content-center">SKILLS</h3>
+              <h4 class="d-flex justify-content-center">SKILLS</h4>
           </div>
           <div>
             <div>

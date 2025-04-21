@@ -1,14 +1,23 @@
 <div class="container-fluid">
+    <div class="row my-3">
+        <div class="col d-flex justify-content-around">
+            <!-- <div (onclick)="resumeService.setStep(2)">1 Header</div> -->
+            <button class="btn" type="button" (click)="resumeService.setStep(0)">Header</button>
+            <button class="btn"  type="button" (click)="resumeService.setStep(1)">Summary</button>
+            <button class="btn"  type="button" (click)="resumeService.setStep(2)">Experience</button>
+            <button class="btn"  type="button" (click)="resumeService.setStep(3)">Education</button>
+            <button class="btn"  type="button" (click)="resumeService.setStep(4)">Skills</button>
+
+        </div>
+    </div>
     <div class="row">
         <div class="col-6" style="border-right: solid 1px black;">
-            <!-- <app-resumeform (next)="nextStep()" *ngIf="currentStep === 0" (resumeHeaderData)="handleFormSubmit($event)"></app-resumeform> -->
-            <!-- <app-resumeform *ngIf="currentStep === 0" (resumeHeaderData)="handleFormSubmit($event)"></app-resumeform> -->
-            <!-- <app-header *ngIf="currentStep === 1" (next)="nextStep()" (prev)="prevStep()" (resumeSummaryData)="handleFormSubmit($event)"></app-header> -->
-            <!-- <app-resumeform *ngIf="resumeService.currentStep() === 0"></app-resumeform> -->
-            <app-header *ngIf="resumeService.currentStep() === 0"></app-header>
-            <app-summary *ngIf="resumeService.currentStep() === 1"></app-summary>
-            <app-experience-list *ngIf="resumeService.currentStep() === 0"></app-experience-list>
-            <app-education *ngIf="resumeService.currentStep() === 0"></app-education>
+            <div class="dynamic-scroll">
+                <app-header *ngIf="resumeService.currentStep() === 0"></app-header>
+                <app-summary *ngIf="resumeService.currentStep() === 1"></app-summary>
+                <app-experience-list *ngIf="resumeService.currentStep() === 2"></app-experience-list>
+                <app-education *ngIf="resumeService.currentStep() === 3"></app-education>
+            </div>
         </div>
         <div class="col-6">
             <app-resume [data]="formData"></app-resume>

@@ -69,7 +69,7 @@ export class ExperienceListComponent implements OnInit{
 
   updateExperience(){
     this.expData.updateExpForm(this.experienceListForm.value);
-    this.expData.nextStep();
+    // this.expData.nextStep();
   }
 
   deleteHighlight(index:number,highlightIndex:number){
@@ -81,6 +81,14 @@ export class ExperienceListComponent implements OnInit{
 
   deleteExperience(index:number){
     this.experiences.removeAt(index);
+  }
+
+  next(){
+    this.expData.nextStep();
+  }
+
+  previous(){
+    this.expData.prevStep();
   }
 
 }

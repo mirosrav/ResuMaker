@@ -19,26 +19,9 @@ export class SharedServiceService {
     })
   }
 
-  // formData:any[]=[];
-
-  // logFormData() {
-  //   console.log("Current formData in service:", this.formData);
-  // }
-  
-
-  // setFormdata(data:any){
-      // this.formData = data;
-    //   if (this.isBrowser){
-    //     localStorage.setItem('dataform', JSON.stringify(data));
-    // }
-    // this.formData.set(data);
-    // console.log(this.formData());
-  // }
 
   
   getFormData(){
-    // console.log(this.formData);
-    // return this.formData;
     return localStorage.getItem('headerFormData');
   }
 
@@ -97,6 +80,9 @@ export class SharedServiceService {
     this.currentStep.update(step => step - 1 )
   }
 
-
+  setStep(index:number){
+    this.currentStep.set(index);
+    console.log(this.currentStep())
+  }
   
 }
