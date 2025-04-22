@@ -37,7 +37,13 @@ export class ResumeComponent implements OnInit{
   @Input() data: any;
 
   constructor(public resumeService:SharedServiceService){
+    console.log(this.resumeService.headerFormData());
+    console.log(this.experienceData);
+    console.log(this.resumeService.experienceFormData()?.experiences?.length)
+  }
 
+  get headerData(){
+    return this.resumeService.headerFormData();
   }
 
   get experienceData(){

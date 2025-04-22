@@ -6,12 +6,22 @@
                 <h4 class="d-flex justify-content-center align-items-center" style="height: 40px; background-color: black; color: white;">{{resumeService.headerFormData()?.firstName  || savedHeaderData.firstName}} {{resumeService.headerFormData()?.lastName || savedHeaderData.lastName}}</h4><!-- data daripada service instead of own component-->
             </div>
             <div class="d-flex justify-content-center">
-                <ul class="list-group list-group-horizontal" style="list-style: none;">
-                    <li class="px-1">{{resumeService.headerFormData()?.contact?.location || savedHeaderData?.contact?.location ? resumeService.headerFormData()?.contact?.location || savedHeaderData?.contact?.location : ''}}</li>
-                    <li class="px-1">{{resumeService.headerFormData()?.contact?.email || savedHeaderData?.contact?.email ? ' • ' + resumeService.headerFormData()?.contact?.email || savedHeaderData?.contact?.email : ''}}</li>
-                    <li class="px-1">{{resumeService.headerFormData()?.contact?.phone || savedHeaderData?.contact?.phone ? ' • ' + resumeService.headerFormData()?.contact?.phone || savedHeaderData?.contact?.phone : ''}}</li>
-                    <li class="px-1">{{resumeService.headerFormData()?.contact?.site || savedHeaderData?.contact?.site ? ' • ' + resumeService.headerFormData()?.contact?.site || savedHeaderData?.contact?.site : ''}}</li>
-                </ul>
+                <ng-container *ngIf="!!headerData; else headerPlaceholder">
+                        <ul class="list-group list-group-horizontal" style="list-style: none;">
+                            <li class="px-1">{{headerData.contact?.location || 'Location'}}</li><!-- Load with data. If no data replace with 'placeholder' -->
+                            <li class="px-1">{{' • ' + headerData.contact?.email || 'E-Mail'}}</li>
+                            <li class="px-1">{{' • ' + headerData.contact?.phone || 'Phone Number'}}</li>
+                            <li class="px-1">{{' • ' + headerData.contact?.site || 'Site'}}</li>
+                        </ul>
+                </ng-container>
+                <ng-template #headerPlaceholder><!-- For initial template in case no data available -->
+                    <ul class="list-group list-group-horizontal" style="list-style: none;">
+                        <li class="px-1">Location</li>
+                        <li class="px-1"> • E-Mail</li>
+                        <li class="px-1"> • Phone Number</li>
+                        <li class="px-1"> • Site</li>
+                    </ul>
+                </ng-template>
             </div>
         </div>
     </div>
@@ -21,7 +31,7 @@
               <h4 class="d-flex justify-content-center">PROFESSIONAL SUMMARY</h4>
           </div>
           <div class="d-flex justify-content-center">
-              <p style="text-align: center;">{{resumeService.summaryFormData()?.summary}}</p>
+              <p style="text-align: center;">{{resumeService.summaryFormData()?.summary || 'Your professional career summary'}}</p>
           </div>
       </div>
     </div>
