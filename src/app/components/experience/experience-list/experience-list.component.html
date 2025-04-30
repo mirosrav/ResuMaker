@@ -1,6 +1,6 @@
-<div class="p-2 bg-light">
+<div class="p-3 bg-light border border-muted rounded">
   <h3>Professional Experience</h3>
-    <form [formGroup]="experienceListForm" class="border border-muted rounded p-2">
+    <form [formGroup]="experienceListForm">
       <div formArrayName="experiences" >
         <div class="border border-muted rounded p-3 mb-2" *ngFor="let expGroup of experiences.controls; let i = index" [formGroupName]="i" >
           <h5>Experience {{i+  1}}</h5>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div  class="d-flex justify-content-end">
-        <button (click)="previous()">Previous</button>
+        <button class="justify-content-start" (click)="previous()">Previous</button>
         <button type="button" (click)="addExperience()">Add Experience</button>
         <button (click)="updateExperience()">Update Form</button>
         <button (click)="next()">Next</button>

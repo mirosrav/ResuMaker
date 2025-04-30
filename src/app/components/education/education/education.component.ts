@@ -15,7 +15,7 @@ export class EducationComponent implements OnInit{
 
   eduStorageData = JSON.parse(localStorage.getItem('eduData') || '{}');
 
-  constructor(private eduData:SharedServiceService){
+  constructor(private eduDataService:SharedServiceService){
 
   }
 
@@ -31,7 +31,7 @@ export class EducationComponent implements OnInit{
     }
 
     this.educationListForm.valueChanges.subscribe((newdata)=>{
-      this.eduData.updateEduPreview(newdata);
+      this.eduDataService.updateEduPreview(newdata);
     })
   }
 
@@ -56,7 +56,7 @@ export class EducationComponent implements OnInit{
   }
 
   updateEducation(){
-    this.eduData.updateEduForm(this.educationListForm.value);
+    this.eduDataService.updateEduForm(this.educationListForm.value);
     // this.eduData.nextStep();
   }
 
@@ -66,8 +66,5 @@ export class EducationComponent implements OnInit{
       this.educations.removeAt(index);
     }
   }
-
-
-
 
 }

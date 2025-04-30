@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit{
       location: new FormControl(''),
       email: new FormControl(''),
       phone: new FormControl(''),
-      site: new FormControl(''),
     }),
   })
 

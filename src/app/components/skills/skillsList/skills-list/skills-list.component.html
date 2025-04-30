@@ -1,4 +1,22 @@
 <div>
-    <p style="font-weight: bold;">LeaderShip: <span style="font-weight: 400;">Speaking, Fundraising, Product Development, Communication, Partnership</span></p>
-    <p style="font-weight: bold;">Front End: <span style="font-weight: 400;">HTML, CSS, Bootstrap, Angular</span></p>
+    <form [formGroup]="skillListForm">
+        <div formArrayName="skills">
+            <div *ngFor="let skill of skills.controls; let i = index" [formGroupName]="i">
+                <div>
+                    <label for="skill">Skill</label>
+                    <input type="text" formControlName="title" class="form-control">
+
+                    <label for="details">Details</label>
+                    <input type="text" formControlName="details" class="form-control">
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" (click)="deleteSkill(i)" [disabled]="skills.length === 1">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <button type="button" (click)="addSkill()">Add New Skill</button>
+        </div>
+    </form>
+    <button type="button" (click)="updateSkill()" [disabled]="!hasDataInLocalStorage">Update Skill</button>
+    <button type="button" (click)="next()">Next</button>
 </div>

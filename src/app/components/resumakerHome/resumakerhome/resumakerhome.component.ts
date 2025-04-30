@@ -7,11 +7,12 @@ import { CommonModule } from '@angular/common';
 import { SharedServiceService } from '../../../services/sharedService.service';
 import { EducationComponent } from "../../education/education/education.component";
 import { ExperienceListComponent } from "../../experience/experience-list/experience-list.component";
+import { SkillsComponent } from '../../skills/skills/skills.component';
 
 @Component({
   selector: 'app-resumakerhome',
   standalone: true,
-  imports: [ResumeComponent, CommonModule, HeaderComponent, SummaryComponent, ExperienceListComponent, EducationComponent],
+  imports: [ResumeComponent, CommonModule, HeaderComponent, SummaryComponent, ExperienceListComponent, EducationComponent,SkillsComponent],
   templateUrl: './resumakerhome.component.html',
   styleUrl: './resumakerhome.component.css'
 })

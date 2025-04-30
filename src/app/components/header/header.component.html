@@ -37,10 +37,6 @@
                         <label for="phone">Phone</label>
                         <input class="form-control" type="text" name="phone" id="" formControlName="phone" [placeholder]="headerStorageData?.contact?.phone || 'Enter phone number'">
                     </div>
-                    <div>
-                        <label for="site">Site</label>
-                        <input class="form-control" type="text" name="site" id="" formControlName="site" [placeholder]="headerStorageData?.contact?.site || 'Enter website'">
-                    </div>
                 </div>
                 <button type="submit" (click)="updateForm($event)">Next</button>
             </form>

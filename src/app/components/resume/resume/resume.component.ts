@@ -30,16 +30,14 @@ export class ResumeComponent implements OnInit{
     return this.resumeService.experienceFormData()?.expHighlight;
   })
   savedEduData = JSON.parse(localStorage.getItem('eduData')|| '{}');
-
+  savedSkillData = JSON.parse(localStorage.getItem('skillData') || '{}');
   
 
   resumeDatas:any;
   @Input() data: any;
 
   constructor(public resumeService:SharedServiceService){
-    console.log(this.resumeService.headerFormData());
-    console.log(this.experienceData);
-    console.log(this.resumeService.experienceFormData()?.experiences?.length)
+
   }
 
   get headerData(){
@@ -52,6 +50,10 @@ export class ResumeComponent implements OnInit{
 
   get educationData(){
     return this.resumeService.educationFormData();
+  }
+
+  get skillData(){
+    return this.resumeService.skillsFormData();
   }
 
 ngOnInit(){
