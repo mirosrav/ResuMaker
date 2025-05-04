@@ -1,13 +1,14 @@
 <div class="container-fluid">
     <div class="row my-3">
-        <div class="col d-flex justify-content-around">
-            <!-- <div (onclick)="resumeService.setStep(2)">1 Header</div> -->
-            <button class="btn" type="button" (click)="resumeService.setStep(0)">Header</button>
-            <button class="btn"  type="button" (click)="resumeService.setStep(1)">Summary</button>
-            <button class="btn"  type="button" (click)="resumeService.setStep(2)">Experience</button>
-            <button class="btn"  type="button" (click)="resumeService.setStep(3)">Education</button>
-            <button class="btn"  type="button" (click)="resumeService.setStep(4)">Skills</button>
-
+        <div class="col d-flex justify-content-around align-items-center">
+            <ng-container *ngFor="let progress of progresses; let i = index">
+                <div class="d-flex flex-column align-items-center">
+                    <div [ngClass]="resumeService.currentStep() >= i ? 'currentpage' : 'btn'">
+                        {{i + 1 }}
+                    </div>
+                    <div>{{progress}}</div>
+                </div>
+            </ng-container>
         </div>
     </div>
     <div class="row">

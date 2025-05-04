@@ -17,6 +17,7 @@ import { SkillsComponent } from '../../skills/skills/skills.component';
   styleUrl: './resumakerhome.component.css'
 })
 export class ResumakerhomeComponent {
+  progresses = ['Header', 'Summary','Experience','Education', 'Skills']
 
   constructor(public resumeService:SharedServiceService){}
 

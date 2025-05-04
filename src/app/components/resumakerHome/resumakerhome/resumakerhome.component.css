@@ -13,3 +13,16 @@
 .default{
 border-right: solid 1px black;
 }
+
+
+
+.currentpage{
+    border-radius: 50%;
+    border: 1px solid blue;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
