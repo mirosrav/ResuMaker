@@ -1,24 +1,24 @@
-<div class="container-fluid">
-    <div class="row my-3">
-        <div class="col d-flex justify-content-around align-items-center">
-            <ng-container *ngFor="let progress of progresses; let i = index">
-                <div class="d-flex flex-column align-items-center">
-                    <div [ngClass]="resumeService.currentStep() >= i ? 'currentpage' : 'btn'">
-                        {{i + 1 }}
+<div class="container-fluid h-100 d-flex justify-content-center align-items-center">
+    <div class="row w-100">
+        <div class="col-6 d-flex flex-column justify-content-center">
+            <div class="d-flex justify-content-around align-items-center">
+                <div *ngFor="let progress of progresses; let i = index">
+                    <div class="d-flex flex-column align-items-center">
+                        <div [ngClass]="resumeService.currentStep() >= i ? 'currentpage' : 'default'">
+                            {{i + 1 }}
+                        </div>
+                        <div>{{progress}}</div>
                     </div>
-                    <div>{{progress}}</div>
                 </div>
-            </ng-container>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6 d-flex justify-content-center align-items-center" [ngClass]="resumeService.currentStep() === 5 ? 'none' : 'default'" style="border-right: solid 1px black;">
-            <div class="dynamic-scroll w-100" style="max-width: 100%;">
-                <app-header *ngIf="resumeService.currentStep() === 0"></app-header>
-                <app-summary *ngIf="resumeService.currentStep() === 1"></app-summary>
-                <app-experience-list *ngIf="resumeService.currentStep() === 2"></app-experience-list>
-                <app-education *ngIf="resumeService.currentStep() === 3"></app-education>
-                <app-skills *ngIf="resumeService.currentStep() === 4"></app-skills>
+            </div>
+            <div class="d-flex justify-content-around align-items-center">
+                <div class="dynamic-scroll w-100" style="max-width: 100%;" [ngSwitch]="resumeService.currentStep()">
+                    <app-header *ngSwitchCase = "0"></app-header>
+                    <app-summary *ngSwitchCase = "1"></app-summary>
+                    <app-experience-list *ngSwitchCase = "2"></app-experience-list>
+                    <app-education *ngSwitchCase = "3"></app-education>
+                    <app-skills *ngSwitchCase = "4"></app-skills>
+                </div>
             </div>
         </div>
         <div class="col-6">

@@ -15,22 +15,22 @@ export class HeaderComponent implements OnInit{
   isHeaderVisible = true;
   @Output() next = new EventEmitter<void>();
   headerStorageData = JSON.parse(localStorage.getItem('headerData') || '{}');
-  constructor(private headerData: SharedServiceService){
+  constructor(private headerDataService: SharedServiceService){
 
   }
 
   ngOnInit(){
-    const savedData = this.headerData.headerFormData();
+    const savedData = this.headerDataService.headerFormData();
     if(savedData){
-      this.resumeForm.patchValue(savedData);
+      this.headerForm.patchValue(savedData);
     }
 
-    this.resumeForm.valueChanges.subscribe((newData)=>{
-      this.headerData.updateHeaderPreview(newData);
+    this.headerForm.valueChanges.subscribe((newData)=>{
+      this.headerDataService.updateHeaderPreview(newData);
     })
   }
 
-  resumeForm = new FormGroup({
+  headerForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     contact: new FormGroup({
@@ -42,12 +42,12 @@ export class HeaderComponent implements OnInit{
 
   updateForm(e:Event){
     e.preventDefault();
-    this.headerData.updateHeaderForm(this.resumeForm.value);
+    this.headerDataService.updateHeaderForm(this.headerForm.value);
     this.proceed();
   }
 
   proceed(){
-    this.headerData.nextStep();
+    this.headerDataService.nextStep();
   }
 }  
 

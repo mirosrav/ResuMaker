@@ -10,10 +10,6 @@
     display: none;
 }
 
-.default{
-border-right: solid 1px black;
-}
-
 
 
 .currentpage{
@@ -25,4 +21,18 @@ border-right: solid 1px black;
     align-items: center;
     justify-content: center;
     z-index: 1;
+}
+
+.default{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+:host{
+    display: block;
+    height: 100%;
 }
