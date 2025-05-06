@@ -6,15 +6,15 @@
     scrollbar-color: #ccc transparent;
 }
 
-.close{
+
+/* .close{
     display: none;
 }
 
-
-
 .currentpage{
     border-radius: 50%;
-    border: 1px solid blue;
+    background-color: blue;
+    color: white;
     width: 30px;
     height: 30px;
     display: flex;
@@ -30,9 +30,80 @@
     align-items: center;
     justify-content: center;
     z-index: 1;
+    background-color: #ccc;
+    border-radius: 50%;
 }
 
 :host{
     display: block;
     height: 100%;
+} */
+
+.step-label{
+    margin-top: 4px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* circle styling */
+.step-circle{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #6b7280;
+}
+
+.step-circle.active{
+    background-color: #6366f1;
+    color: white;
+}
+
+.step-circle.completed{
+    background-color: #c7d2fe;
+    color: white;
+}
+
+/* line styling */
+.step-line-container{
+    flex: 1;
+    height: 4px;
+    background-color: #e5e7eb;
+    position: relative;
+    margin: 0 8px;
+    border-radius: 2px;
+}
+
+.step-line{
+    height: 100%;
+    background-color: transparent;
+    transition: width 0.3s;
+}
+
+.step-line.filled{
+    background-color: #6366f1;
+    width: 100%;
+}
+
+.step-line.current{
+    background-color: #6366f1;
+    width: 50%;
+}
+
+div.bgimage{
+    /* background-image: url('/assets/images/llline.svg'); */
+    background-image: url('/assets/images/wave.svg');
+    background-repeat:repeat-y;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* position:absolute; */
+}
+
+#imgFilter{
+    filter: blur(5%);
 }

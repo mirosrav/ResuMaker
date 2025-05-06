@@ -1,18 +1,34 @@
-<div class="container-fluid h-100 d-flex justify-content-center align-items-center">
-    <div class="row w-100">
-        <div class="col-6 d-flex flex-column justify-content-center">
-            <div class="d-flex justify-content-around align-items-center">
-                <div *ngFor="let progress of progresses; let i = index">
+<div class="row w-100 d-flex align-items-stretch mx-0" style="min-height: 100vh;">
+    <div id="imgFilter" class="col-6 d-flex flex-column bgimage" style="padding-top: 10%;">
+        <div class="mx-3 py-4" style=" border: 1px solid rgb(211, 211, 211);border-radius: 5px; background-color: rgba(255, 255, 255, 0.719); backdrop-filter: blur(10px);">
+            <div class="d-flex justify-content-center gap-2 px-4">
+                <ng-container *ngFor="let progress of progresses; let i = index">
+
+                    <!-- Circle -->
                     <div class="d-flex flex-column align-items-center">
-                        <div [ngClass]="resumeService.currentStep() >= i ? 'currentpage' : 'default'">
+                        <div class="step-circle" [ngClass]="{'active':resumeService.currentStep() === i, 'completed': resumeService.currentStep() > i}">
                             {{i + 1 }}
                         </div>
-                        <div>{{progress}}</div>
+                        <div class="step-label">{{progress}}</div>
                     </div>
-                </div>
+
+                    <!-- Progress Line -->
+
+                    <div *ngIf="i < progresses.length - 1" class="d-flex align-self-center step-line-container" style="width: 60px;">
+                        <div class="step-line" [ngClass]="{'filled':resumeService.currentStep() > i, 'current':resumeService.currentStep() === i }">
+                            <!-- <hr style="width: 50%; border: solid 2px;">
+                            <hr style="width: 50%; border: 2px solid red;"> -->
+                        </div>
+                    </div>
+
+                </ng-container>
             </div>
+
+            <hr class="mx-auto" style="width: 91%;">
+            
+            <!-- Loaded Components -->
             <div class="d-flex justify-content-around align-items-center">
-                <div class="dynamic-scroll w-100" style="max-width: 100%;" [ngSwitch]="resumeService.currentStep()">
+                <div class="w-100" [ngSwitch]="resumeService.currentStep()">
                     <app-header *ngSwitchCase = "0"></app-header>
                     <app-summary *ngSwitchCase = "1"></app-summary>
                     <app-experience-list *ngSwitchCase = "2"></app-experience-list>
@@ -20,9 +36,19 @@
                     <app-skills *ngSwitchCase = "4"></app-skills>
                 </div>
             </div>
-        </div>
-        <div class="col-6">
-            <app-resume [data]="formData"></app-resume>
+
         </div>
     </div>
+
+    <!-- Divider -->
+    <div class="col-auto d-flex justify-content-center p-0">
+        <div style="position: absolute; width: 1px; background-color: black; height: 100%;"></div>
+    </div>
+    <!-- <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background-color: black;"></div> -->
+
+    <!-- Preview Components -->
+    <div class="col-6" >
+        <div class="dynamic-scroll"><app-resume [data]="formData"></app-resume></div>
+    </div>
 </div>
+
