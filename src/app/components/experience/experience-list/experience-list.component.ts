@@ -85,6 +85,7 @@ export class ExperienceListComponent implements OnInit{
 
   next(){
     this.expData.nextStep();
+    this.updateExperience();
   }
 
   previous(){

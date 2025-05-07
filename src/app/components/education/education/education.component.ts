@@ -67,4 +67,7 @@ export class EducationComponent implements OnInit{
     }
   }
 
+  previous(){
+    this.eduDataService.prevStep();
+  }
 }

@@ -1,65 +1,68 @@
 <div class="container p-3">
   <div class="row">
     <h3>Professional Experience</h3>
-      <form [formGroup]="experienceListForm" style="background-color: transparent;">
-        <div formArrayName="experiences" >
-          <div class="p-3 mb-2 border-grey rounded" *ngFor="let expGroup of experiences.controls; let i = index" [formGroupName]="i" >
-            <h5>Experience {{i+  1}}</h5>
-            <div style="margin-bottom: 15px;">
-              <div class="row">
-                <div class="col-6">
-                  <label>Company Name</label>
-                  <input type="text" formControlName="company" class="form-control">
-                  <div><app-form-error [control]="expGroup.get('company')"></app-form-error></div>
-                </div>
-        
-                <div class="col-6">
-                  <label>Designation</label>
-                  <input type="text" formControlName="designation" class="form-control">
-                  <div><app-form-error [control]="expGroup.get('designation')"></app-form-error></div>
-                </div>
-                </div>
-      
-              <div class="row">
-                <div class="col-6">
-                  <label>Commence Date</label>
-                  <input type="text" formControlName="date" class="form-control">
-                  <div><app-form-error [control]="expGroup.get('date')"></app-form-error></div>
-                </div>
-        
-                <div class="col-6">
-                  <label>Location</label>
-                  <input type="text" formControlName="compLocation" class="form-control">
-                  <div><app-form-error [control]="expGroup.get('compLocation')"></app-form-error></div>
-                </div>
+    <form [formGroup]="experienceListForm" style="background-color: transparent;">
+      <div formArrayName="experiences">
+        <div class="p-3 mb-2 border-grey rounded" *ngFor="let expGroup of experiences.controls; let i = index"
+          [formGroupName]="i">
+          <h5>Experience {{i+ 1}}</h5>
+          <div style="margin-bottom: 15px;">
+            <div class="row">
+              <div class="col-6">
+                <label>Company Name</label>
+                <input type="text" formControlName="company" class="form-control">
+                <div><app-form-error [control]="expGroup.get('company')"></app-form-error></div>
+              </div>
+
+              <div class="col-6">
+                <label>Designation</label>
+                <input type="text" formControlName="designation" class="form-control">
+                <div><app-form-error [control]="expGroup.get('designation')"></app-form-error></div>
               </div>
             </div>
-    
-            <!-- Highlights -->
-          
-            <div formArrayName="expHighlight" class="border-greyer rounded p-2 mb-2" >
-                <div class="d-flex flex-column gap-2 mb-2">
-                  <div *ngFor="let hl of getHighlights(i)?.controls; let j = index">
-                        <label>Experience Highlight {{j+1}}</label>
-                        <div class="d-flex justify-content-between">
-                        <input type="text" [formControlName]="j" class="form-control mx-2">
-                        <button class="btn btn-danger" type="button" (click)="deleteHighlight(i,j)">Delete</button>
-                      </div>
-                  </div>
-                </div>
-              <button class="btn btn-primary" type="button" (click)="addHighlight(i)">Add Work Highlight</button>
+
+            <div class="row">
+              <div class="col-6">
+                <label>Commence Date</label>
+                <input type="text" formControlName="date" class="form-control">
+                <div><app-form-error [control]="expGroup.get('date')"></app-form-error></div>
+              </div>
+
+              <div class="col-6">
+                <label>Location</label>
+                <input type="text" formControlName="compLocation" class="form-control">
+                <div><app-form-error [control]="expGroup.get('compLocation')"></app-form-error></div>
+              </div>
             </div>
-            <div class="d-flex justify-content-end "><button class="btn btn-danger" type="button" (click)="deleteExperience(i)" [disabled]="experiences.length === 1">Delete this experience</button></div>
+          </div>
+
+          <!-- Highlights -->
+
+          <div formArrayName="expHighlight" class="border-greyer rounded p-2 mb-2">
+            <div class="d-flex flex-column gap-2 mb-2">
+              <div *ngFor="let hl of getHighlights(i)?.controls; let j = index">
+                <label>Experience Highlight {{j+1}}</label>
+                <div class="d-flex justify-content-between">
+                  <input type="text" [formControlName]="j" class="form-control" style="margin-right: 10px;">
+                  <button class="btn btn-danger" type="button" (click)="deleteHighlight(i,j)">Delete</button>
+                </div>
+                <div><app-form-error [control]="hl"></app-form-error></div>
+              </div>
+            </div>
+            <button class="btn btn-primary" type="button" (click)="addHighlight(i)">Add Work Highlight</button>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-danger" type="button"  (click)="deleteExperience(i)"
+              [disabled]="experiences.length === 1">Delete this experience</button>
           </div>
         </div>
-        <div  class="d-flex justify-content-end">
-          <button class="justify-content-start" (click)="previous()">Previous</button>
-          <button type="button" (click)="addExperience()">Add Experience</button>
-          <button (click)="updateExperience()">Update Form</button>
-          <button (click)="next()">Next</button>
-        </div>
-        
-      </form>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-primary" (click)="previous()">Previous</button>
+        <button class="btn btn-primary" (click)="addExperience()">Add Experience</button>
+        <button class="btn btn-primary" (click)="next()">Next</button>
+      </div>
+
+    </form>
   </div>
-  </div>
-  
+</div>
