@@ -11,7 +11,7 @@ import { AbstractControl, FormArray, FormControl, FormControlName } from '@angul
   styleUrl: './form-error.component.css'
 })
 export class FormErrorComponent {
-  @Input() control!: AbstractControl | null;
+  @Input() control: AbstractControl | null = null;
 
   getErrorMessage(){
     if(this.control?.hasError('required')){

@@ -1,3 +1,3 @@
-<small *ngIf="control?.invalid && control?.touched" style="color: red;">
+<small *ngIf="control && control.invalid && control.touched" style="color: red;">
     {{getErrorMessage()}}
 </small>
