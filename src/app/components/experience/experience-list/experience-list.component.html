@@ -22,10 +22,16 @@
             </div>
 
             <div class="row">
-              <div class="col-6">
-                <label>Commence Date</label>
-                <input type="text" formControlName="date" class="form-control">
-                <div><app-form-error [control]="expGroup.get('date')"></app-form-error></div>
+              <div class="col-3">
+                <label>Start Date</label>
+                <input type="date" formControlName="startDate" class="form-control">
+                <div><app-form-error [control]="expGroup.get('startDate')"></app-form-error></div>
+              </div>
+
+              <div class="col-3">
+                <label>End Date</label>
+                <input type="date" formControlName="endDate" class="form-control">
+                <div><app-form-error [control]="expGroup.get('endDate')"></app-form-error></div>
               </div>
 
               <div class="col-6">
@@ -52,7 +58,7 @@
             <button class="btn btn-primary" type="button" (click)="addHighlight(i)">Add Work Highlight</button>
           </div>
           <div class="d-flex justify-content-end">
-            <button class="btn btn-danger" type="button"  (click)="deleteExperience(i)"
+            <button class="btn btn-danger" type="button" (click)="deleteExperience(i)"
               [disabled]="experiences.length === 1">Delete this experience</button>
           </div>
         </div>
