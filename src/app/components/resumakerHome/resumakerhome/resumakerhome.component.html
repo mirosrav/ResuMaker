@@ -1,6 +1,6 @@
 <div class="row w-100 d-flex align-items-stretch mx-0 dynamic-scroll" style="min-height: 100vh;">
-    <div id="imgFilter" class="col-6 d-flex flex-column bgimage " style="padding-top: 10%;">
-        <div class="mx-3 py-4" style=" border: 1px solid rgb(211, 211, 211);border-radius: 5px; background-color: rgba(255, 255, 255, 0.719); backdrop-filter: blur(10px);">
+    <div [ngClass]="isLastStep ? 'd-none' : 'col-6 d-flex flex-column bgimage'" style="padding-top: 10%;">
+        <div [ngClass]="isLastStep ? 'd-none' : 'mx-3 py-4 formStyle'">
             <div class="d-flex justify-content-center gap-2 px-4">
                 <ng-container *ngFor="let progress of progresses; let i = index">
 
@@ -41,13 +41,13 @@
     </div>
 
     <!-- Divider -->
-    <div class="col-auto d-flex justify-content-center p-0">
+    <div [ngClass]="isLastStep ? 'd-none' : 'col-auto d-flex justify-content-center p-0'" >
         <div style="position: absolute; width: 1px; background-color: black; height: 100%;"></div>
     </div>
     <!-- <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background-color: black;"></div> -->
 
     <!-- Preview Components -->
-    <div class="col-6 dynamic-scroll" >
+    <div [ngClass]="isLastStep ? 'col-12 dynamic-scroll' : 'col-6 dynamic-scroll'">
         <div style="position: sticky; top: 0;"><app-resume [data]="formData"></app-resume></div>
     </div>
 </div>

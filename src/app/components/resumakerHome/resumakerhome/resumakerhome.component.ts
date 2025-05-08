@@ -28,4 +28,8 @@ export class ResumakerhomeComponent {
     console.log('Form Data:', data);
   }
 
+  get isLastStep():boolean{
+    return this.resumeService.currentStep() === 5;
+  }
+
 }
