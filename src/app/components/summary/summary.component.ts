@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SharedServiceService } from '../../services/sharedService.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-summary',
@@ -31,7 +31,7 @@ export class SummaryComponent {
 
 
   summaryForm = new FormGroup({
-    summary: new FormControl('')
+    summary: new FormControl('', Validators.required)
   })
 
   onSubmit(){
@@ -40,6 +40,10 @@ export class SummaryComponent {
   }
 
   proceed(){
+    if(this.summaryForm.invalid){
+      return;
+    }
+
     this.summaryService.updateSummaryForm(this.summaryForm.value);
     this.summaryService.nextStep();
 
