@@ -47,7 +47,8 @@
                             <div>{{exp.designation || 'Your designation'}}</div>
                         </div>
                         <div class="col-6 text-end">
-                            <div>{{exp.date || 'Date for this experience'}}</div>
+                            <div>{{exp.startDate && exp.endDate ? (exp.startDate | date: 'dd/MM/yyyy') + ' - ' + (exp.endDate | date: 'dd/MM/yyyy')
+                                : 'Date for this experience'}}</div>
                             <div>{{exp.compLocation || 'Location for this experience'}}</div>
                         </div>
                         <ul>
@@ -156,5 +157,7 @@
     </div>
     
 </div>
-
-<button (click)="downloadPdf()" [disabled]="resumeService.currentStep() !== 5">Generate Resume</button>
+<div [ngClass]="isLastStep ? 'd-flex justify-content-between' : 'd-none'">
+    <button (click)="previous()">Previous</button>
+    <button (click)="downloadPdf()">Generate Resume</button>
+</div>

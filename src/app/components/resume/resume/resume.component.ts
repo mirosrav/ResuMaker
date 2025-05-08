@@ -76,6 +76,14 @@ downloadPdf(){
     if (button) button.style.display = 'block';
   })
 }
+
+previous(){
+  this.resumeService.prevStep();
+}
+
+get isLastStep():boolean{
+  return this.resumeService.currentStep() === 5;
+}
   // ngOnChanges(changes: SimpleChanges): void {
   //     this.resumeDatas = JSON.parse(this.resumeData.getFormData()!);
   //     console.log(this.resumeDatas);
