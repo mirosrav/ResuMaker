@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { SharedServiceService } from '../../../services/sharedService.service';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormErrorComponent } from '../../../shared/form-error/form-error.component';
 
 @Component({
   selector: 'app-education',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, FormErrorComponent],
   templateUrl: './education.component.html',
   styleUrl: './education.component.css'
 })
@@ -68,9 +69,16 @@ export class EducationComponent implements OnInit{
   }
 
   next(){
+    this.eduDataService.markFormGroupTouched(this.educationListForm);
+
+    if(this.educationListForm.invalid){
+      return;
+    };
+
     this.updateEducation();
     this.eduDataService.nextStep();
   }
+
   previous(){
     this.eduDataService.prevStep();
   }

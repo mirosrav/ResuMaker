@@ -78,7 +78,7 @@ export class ExperienceListComponent implements OnInit {
   }
 
   next() {
-    this.markFormTouched(this.experienceListForm);
+    this.expDataService.markFormGroupTouched(this.experienceListForm);
     if (this.experienceListForm.invalid) {
       return;
     }
@@ -89,16 +89,6 @@ export class ExperienceListComponent implements OnInit {
 
   previous() {
     this.expDataService.prevStep();
-  }
-
-  markFormTouched(group: FormGroup | FormArray) {
-    Object.values(group.controls).forEach(control => {
-      if (control instanceof FormGroup || control instanceof FormArray) {
-        this.markFormTouched(control);
-      } else {
-        control.markAsTouched();
-      }
-    })
   }
 
 }

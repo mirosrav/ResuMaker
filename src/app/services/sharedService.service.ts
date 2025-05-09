@@ -1,6 +1,8 @@
 import { isPlatformBrowser } from '@angular/common';
 import { effect, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 import { single } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -97,4 +99,25 @@ export class SharedServiceService {
     console.log(this.currentStep())
   }
   
+  markFormGroupTouched(group: FormGroup | FormArray) {
+    Object.values(group.controls).forEach(control => {
+      if (control instanceof FormGroup || control instanceof FormArray) {
+        this.markFormGroupTouched(control);
+      } else {
+        control.markAsTouched();
+      }
+    })
+  }
+
+  handleNext(form: FormGroup | FormArray){
+    this.markFormGroupTouched(form);
+
+    if (form.invalid) {
+      return;
+    }
+
+    this.nextStep();
+    this.updateExpForm(form.value);
+  }
+
 }

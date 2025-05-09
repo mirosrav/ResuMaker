@@ -15,7 +15,7 @@ export class FormErrorComponent {
 
   getErrorMessage(){
     if(this.control?.hasError('required')){
-      return 'This field is required';
+      return '* This field is required';
     }
     return 'Invalid Field';
   }

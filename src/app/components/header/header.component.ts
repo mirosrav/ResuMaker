@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
 
   updateForm(e: Event) {
     e.preventDefault();
-    this.markFormGroupTouched(this.headerForm);
+    this.headerDataService.markFormGroupTouched(this.headerForm);
     
     if (this.headerForm.invalid) {
       return;
@@ -53,17 +53,7 @@ export class HeaderComponent implements OnInit {
     this.headerDataService.nextStep();
   }
 
-  markFormGroupTouched(formGroup: FormGroup) {
-  Object.values(formGroup.controls).forEach(control => {
-    if (control instanceof FormGroup) {
-      this.markFormGroupTouched(control); // recursively touch nested groups
-    } else {
-      control.markAsTouched();
-    }
-  });
-}
-
-
+  
 }
 
 
