@@ -1,8 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { effect, Inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { single } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +16,7 @@ export class SharedServiceService {
 
   constructor(){
     effect(()=>{//untuk tahu bila signal berubah.
-      console.log(this.currentStep());
+      console.log(this.experienceFormData());
     })
   }
 
@@ -51,35 +49,25 @@ export class SharedServiceService {
 
   /* set local storage data from user input */
   updateHeaderForm(newData:any){
-    this.headerFormData.set(newData);
-    if(!localStorage.getItem('headerData')){
-      this.headerFormData.set(newData);
-    }else{
-      console.log('data already exists');
-    }
-
-    localStorage.setItem('headerData', JSON.stringify(newData));//convert data from object to string
+    this.updateFormData(this.headerFormData, 'headerData', newData)
   }
 
   updateSummaryForm(newData:any){
-    this.summaryFormData.set(newData);
-    localStorage.setItem('summaryData', JSON.stringify(newData));
+    this.updateFormData(this.summaryFormData, 'summaryData',newData);
   }
 
   updateExpForm(newData:any){
-    this.experienceFormData.set(newData);
-    localStorage.setItem('expData', JSON.stringify(newData));
+    this.updateFormData(this.experienceFormData, 'expData',newData);
   }
 
   updateEduForm(newData:any){
-    this.educationFormData.set(newData);
-    localStorage.setItem('eduData',JSON.stringify(newData));
+    this.updateFormData(this.educationFormData, 'eduData',newData);
   }
 
   updateSkillForm(newData:any){
-    this.skillsFormData.set(newData);
-    localStorage.setItem('skillData', JSON.stringify(newData));
+    this.updateFormData(this.skillsFormData, 'skillData',newData);
   }
+  
 
   private loadFromLocalStorage(key:string){
     const savedData = localStorage.getItem(key);
@@ -118,6 +106,15 @@ export class SharedServiceService {
 
     this.nextStep();
     this.updateExpForm(form.value);
+  }
+
+  updateFormData<T>(
+      signal: {set: (val: T) => void},//arrow function which means signal object has a function named set,that takes 'val' as parameter of type T that returns nothing
+      key: string,//name for localstorage name
+      newData: T //new data to be updated in the signal and localstorage
+    ){
+      signal.set(newData);
+      localStorage.setItem(key, JSON.stringify(newData));
   }
 
 }
