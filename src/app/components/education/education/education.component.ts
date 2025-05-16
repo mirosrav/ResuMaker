@@ -43,7 +43,8 @@ export class EducationComponent implements OnInit{
   createEducationList(data?:any):FormGroup{
     return new FormGroup({
       title: new FormControl(data?.title || '',Validators.required),
-      date: new FormControl(data?.date || '',Validators.required),
+      startDate: new FormControl(data?.startDate || '',Validators.required),
+      gradDate: new FormControl(data?.gradDate || '',Validators.required),
       institute: new FormControl(data?.institute || '', Validators.required)
     })
   }

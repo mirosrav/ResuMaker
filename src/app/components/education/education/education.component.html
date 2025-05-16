@@ -11,11 +11,16 @@
                             <div><app-form-error [control]="education.get('title')"></app-form-error></div>
                         </div>
             
-                        <div class="col-6">
-                            <label for="date">Study Date</label>
-                            <input type="text" formControlName="date" class="form-control">
-                            <div><app-form-error [control]="education.get('date')"></app-form-error></div>
-                        </div>
+                            <div class="col-3">
+                                <label for="date">Start Date</label>
+                                <input type="month" formControlName="startDate" class="form-control">
+                                <div><app-form-error [control]="education.get('startDate')"></app-form-error></div>
+                            </div>
+                            <div class="col-3">
+                                <label for="date">Graduate Date</label>
+                                <input type="month" formControlName="gradDate" class="form-control">
+                                <div><app-form-error [control]="education.get('gradDate')"></app-form-error></div>
+                            </div>
                     </div>
                     
 
