@@ -43,7 +43,6 @@ export class SummaryComponent {
     if(this.summaryForm.invalid){
       return;
     }
-
     this.summaryService.updateSummaryForm(this.summaryForm.value);
     this.summaryService.nextStep();
 
