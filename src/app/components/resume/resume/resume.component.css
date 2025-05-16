@@ -2,6 +2,9 @@
     border: 3px solid pink;
 }
 
-.bottomBorder{
-    border-bottom: 1px solid;
-}
+
+
+/* @page{
+    size: A4;
+    margin: 20mm;
+} */
