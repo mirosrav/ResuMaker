@@ -64,6 +64,10 @@ export class SkillsListComponent implements OnInit{
 
   next(){
     this.skillService.nextStep();
+    this.updateSkill();
   }
 
+  previous(){
+    this.skillService.prevStep();
+  }
 }

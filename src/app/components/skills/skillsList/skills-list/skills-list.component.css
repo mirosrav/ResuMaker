@@ -1,3 +1,7 @@
-p{
-    margin-bottom: 0;
+.border-grey{
+    border: solid 1px rgb(161, 161, 161);
+}
+
+.border-greyer{
+    border: solid 1px rgb(148, 148, 148);
 }
