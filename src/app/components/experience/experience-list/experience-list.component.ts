@@ -42,6 +42,7 @@ export class ExperienceListComponent implements OnInit {
       designation: new FormControl(data?.designation || '', Validators.required),
       startDate: new FormControl(data?.startDate || '', Validators.required),
       endDate: new FormControl(data?.endDate || '', Validators.required),
+      isCurrent:new FormControl(data?.isCurrent || false),
       compLocation: new FormControl(data?.compLocation || '', Validators.required),
       expHighlight: new FormArray(
         (data?.expHighlight?.length ? data.expHighlight : ['']).map(
@@ -89,6 +90,23 @@ export class ExperienceListComponent implements OnInit {
 
   previous() {
     this.expDataService.prevStep();
+  }
+
+  setToCurrent(index:number){
+    const experienceGroup = this.experiences.at(index) as FormGroup;
+    const isCurrentControl = experienceGroup.get('isCurrent');
+    const endDateControl = experienceGroup.get('endDate');
+
+    const newValue = !isCurrentControl?.value;
+    isCurrentControl?.setValue(newValue);
+
+    if (newValue){
+      endDateControl?.clearValidators();
+      endDateControl?.setValue(null);
+    }else{
+      endDateControl?.setValidators(Validators.required);
+    }
+    endDateControl?.updateValueAndValidity();
   }
 
 }
