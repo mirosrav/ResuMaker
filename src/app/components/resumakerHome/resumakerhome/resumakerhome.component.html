@@ -47,8 +47,9 @@
     <!-- <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background-color: black;"></div> -->
 
     <!-- Preview Components -->
-    <div [ngClass]="isLastStep ? 'col-12 dynamic-scroll' : 'col-6 dynamic-scroll'">
-        <div style="position: sticky; top: 0;"><app-resume [data]="formData"></app-resume></div>
+    <div [ngClass]="isLastStep ? 'col-12 d-flex justify-content-center bgimage' : 'col-6 dynamic-scroll'" style="position: sticky; top: 0;">
+        <div [ngClass]="isLastStep ? 'w-50 bg-white border border-dark' : 'w-100'" style="position: sticky; top: 0;">
+            <app-resume [data]="formData"></app-resume></div>
     </div>
 </div>
 
