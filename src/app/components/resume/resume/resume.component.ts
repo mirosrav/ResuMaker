@@ -3,12 +3,10 @@ import { SharedServiceService } from '../../../services/sharedService.service';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { CommonModule } from '@angular/common';
-// import { HeaderComponent } from "../../header/header.component";
-// import { SummaryComponent } from "../../summary/summary.component";
-// import { ExperienceComponent } from "../../experience/experience.component";
-// import { EducationComponent } from "../../education/education/education.component";
-// import { SkillsComponent } from "../../skills/skills/skills.component";
-// import { tick } from '@angular/core/testing';
+
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import { style } from '@angular/animations';
+
 
 
 
@@ -58,24 +56,106 @@ export class ResumeComponent implements OnInit{
 
 ngOnInit(){
 }
-
+/* 
 downloadPdf(){
-  const button = document.querySelector('.noclick') as HTMLElement;
-  if (button) button.style.display = 'none';
+  const buttons = document.querySelectorAll('.noclick') as NodeListOf<HTMLElement>;
+
+  if(buttons.length > 0){
+    buttons.forEach(button =>{
+      button.style.display = 'none';
+    });
+  }
+  
   const data = this.resumePreview.nativeElement;
 
-  html2canvas(data, {scale: 2}).then(canvas =>{
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF('p','mm','a4');
-    const imgWidth = 210;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  const options = {
+    margin: [0, 0, 0, 0],
+    filename: 'resume.pdf',
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
 
-    pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-    pdf.save('resume.pdf');
-
-    if (button) button.style.display = 'block';
+  html2pdf().from(data).set(options).save().then(()=>{
+    if(buttons.length > 0){
+      buttons.forEach(button =>{
+        button.style.display = 'block';
+      });
+    }
   })
+
+  // html2canvas(data, {scale: 2}).then(canvas =>{
+  //   const imgData = canvas.toDataURL('image/png');
+  //   const pdf = new jsPDF('p','mm','a4');
+  //   const imgWidth = 210;
+  //   const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  //   pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+  //   pdf.save('resume.pdf');
+
+
+  //   if(buttons.length > 0){
+  //     buttons.forEach(button =>{
+  //       button.style.display = 'block';
+  //     });
+  //   }
+  // })
 }
+*/
+
+downloadPdf() {
+  const buttons = document.querySelectorAll('.noclick') as NodeListOf<HTMLElement>;
+  
+  // Hide buttons during PDF generation
+  if (buttons.length > 0) {
+    buttons.forEach(button => {
+      button.style.display = 'none';
+    });
+  }
+  
+  const element = this.resumePreview.nativeElement;
+  const pdf = new jsPDF('p', 'mm', 'a4');
+
+  pdf.setFont("helvetica", "normal");
+  
+  // Use the fromHTML method to convert HTML to PDF
+  pdf.html(element, {
+    callback: function(pdf) {
+      pdf.save('resume.pdf');
+      
+      // Show buttons after PDF generation is complete
+      if (buttons.length > 0) {
+        buttons.forEach(button => {
+          button.style.display = 'block';
+        });
+      }
+    },
+    x: 0,
+    y: 0,
+    width: 210, // slightly less than A4 width (210mm)
+    windowWidth: element.offsetWidth,
+    html2canvas:{
+      letterRendering: true,
+      useCORS:true
+    }
+  });
+}
+
+/*downloadPdf() {
+  const pdf = new jsPDF();
+  const element = this.resumePreview.nativeElement; // Replace with your element ID
+  pdf.html(element, {
+    callback: (doc) => {
+      doc.save('document.pdf');
+    },
+    margin: [10, 10, 10, 10],
+    autoPaging: 'text',
+    x: 0,
+    y: 0,
+    width: 210, // Adjust as needed
+    windowWidth: element.offsetWidth // Adjust as needed
+  });
+}*/
 
 previous(){
   this.resumeService.prevStep();
