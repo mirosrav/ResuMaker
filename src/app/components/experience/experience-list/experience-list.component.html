@@ -1,7 +1,7 @@
 <div class="container p-3">
   <div class="row">
     <h3>Professional Experience</h3>
-    <form [formGroup]="experienceListForm" style="background-color: transparent;">
+    <form [formGroup]="experienceListForm" style="background-color: transparent;" (ngSubmit)="next()">
       <div formArrayName="experiences">
         <div class="p-3 mb-2 border-grey rounded" *ngFor="let expGroup of experiences.controls; let i = index"
           [formGroupName]="i">
@@ -71,7 +71,7 @@
       <div class="d-flex justify-content-between">
         <button class="btn btn-primary" (click)="previous()">Previous</button>
         <button class="btn btn-primary" (click)="addExperience()">Add Experience</button>
-        <button class="btn btn-primary" (click)="next()">Next</button>
+        <button class="btn btn-primary" type="submit">Next</button>
       </div>
 
     </form>
