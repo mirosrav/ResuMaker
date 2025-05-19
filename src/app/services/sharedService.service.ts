@@ -15,9 +15,6 @@ export class SharedServiceService {
   currentStep = signal(0);
 
   constructor(){
-    effect(()=>{//untuk tahu bila signal berubah.
-      console.log(this.experienceFormData());
-    })
   }
 
 
