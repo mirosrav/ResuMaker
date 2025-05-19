@@ -30,6 +30,7 @@ export class ExperienceListComponent implements OnInit {
     this.experienceListForm.valueChanges.subscribe((newData) => {
       this.expDataService.updateExpPreview(newData);
     });
+
   }
 
   experienceListForm = new FormGroup({
@@ -37,11 +38,11 @@ export class ExperienceListComponent implements OnInit {
   })
 
   createExperienceList(data?: any): FormGroup {
-    return new FormGroup({
+    const formGroup = new FormGroup({
       company: new FormControl(data?.company || '', Validators.required),
       designation: new FormControl(data?.designation || '', Validators.required),
       startDate: new FormControl(data?.startDate || '', Validators.required),
-      endDate: new FormControl(data?.endDate || '', Validators.required),
+      endDate: new FormControl(data?.endDate || ''),//no validator is set to bypass the invalid form flag. dynamically add validators via setEndDateValidation
       isCurrent:new FormControl(data?.isCurrent || false),
       compLocation: new FormControl(data?.compLocation || '', Validators.required),
       expHighlight: new FormArray(
@@ -49,6 +50,30 @@ export class ExperienceListComponent implements OnInit {
           (hl: string) => new FormControl(hl, Validators.required)
         ))
     });
+
+    this.setEndDateValidation(formGroup);
+
+    formGroup.get('isCurrent')?.valueChanges.subscribe(()=>{
+      this.setEndDateValidation(formGroup);
+    });
+
+    return formGroup;
+  }
+
+
+  private setEndDateValidation(form:FormGroup):void{//set isCurrent control validators with this helper function
+    const endDateControl = form.get('endDate');
+    const isCurrentControl = form.get('isCurrent');
+
+    if(endDateControl && isCurrentControl){//both control have data
+      if(isCurrentControl.value === true){//isCurrent control is set to true
+        endDateControl.clearValidators();//delete endDate control validators to ensure form is VALID when form is loaded
+      }else{
+        endDateControl.setValidators(Validators.required);//if isCurrent set to false, set endDate control validators to required
+      }
+      endDateControl.updateValueAndValidity();
+    }
+
   }
 
   get experiences(): FormArray {
@@ -80,12 +105,13 @@ export class ExperienceListComponent implements OnInit {
 
   next() {
     this.expDataService.markFormGroupTouched(this.experienceListForm);
-    if (this.experienceListForm.invalid) {
+
+    if(this.experienceListForm.invalid){
       return;
     }
 
-    this.expDataService.nextStep();
     this.expDataService.updateExpForm(this.experienceListForm.value);
+    this.expDataService.nextStep();
   }
 
   previous() {
@@ -100,13 +126,6 @@ export class ExperienceListComponent implements OnInit {
     const newValue = !isCurrentControl?.value;
     isCurrentControl?.setValue(newValue);
 
-    if (newValue){
-      endDateControl?.clearValidators();
-      endDateControl?.setValue(null);
-    }else{
-      endDateControl?.setValidators(Validators.required);
-    }
-    endDateControl?.updateValueAndValidity();
   }
 
 }
