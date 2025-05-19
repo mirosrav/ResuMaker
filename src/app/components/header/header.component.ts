@@ -14,7 +14,6 @@ import { FormErrorComponent } from '../../shared/form-error/form-error.component
 })
 export class HeaderComponent implements OnInit {
   isHeaderVisible = true;
-  @Output() next = new EventEmitter<void>();
   headerStorageData = JSON.parse(localStorage.getItem('headerData') || '{}');
   constructor(private headerDataService: SharedServiceService) {
 
@@ -41,8 +40,7 @@ export class HeaderComponent implements OnInit {
     }),
   })
 
-  updateForm(e: Event) {
-    e.preventDefault();
+  next() {
     this.headerDataService.markFormGroupTouched(this.headerForm);
     
     if (this.headerForm.invalid) {

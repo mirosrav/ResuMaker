@@ -10,9 +10,6 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './summary.component.css'
 })
 export class SummaryComponent {
-  @Output() next = new EventEmitter<void>();
-  @Output() prev = new EventEmitter<void>();
-  @Output() resumeSummaryData = new EventEmitter<any>();
   summaryData = JSON.parse(localStorage.getItem('summaryData') || '{}');
   
   constructor(private summaryService:SharedServiceService){
@@ -34,12 +31,9 @@ export class SummaryComponent {
     summary: new FormControl('', Validators.required)
   })
 
-  onSubmit(){
-    this.next.emit();
-    // this.addData();
-  }
+  next(){
+    this.summaryService.markFormGroupTouched(this.summaryForm);
 
-  proceed(){
     if(this.summaryForm.invalid){
       return;
     }
@@ -48,7 +42,7 @@ export class SummaryComponent {
 
   }
 
-  goBack() {
+  previous() {
     this.summaryService.prevStep();
   }
   

@@ -63,8 +63,13 @@ export class SkillsListComponent implements OnInit{
   }
 
   next(){
+    this.skillService.markFormGroupTouched(this.skillListForm);
+
+    if(this.skillListForm.invalid){
+      return;
+    }
+    this.updateSkill()
     this.skillService.nextStep();
-    this.updateSkill();
   }
 
   previous(){
