@@ -1,5 +1,5 @@
 <div>
-    <form [formGroup]="summaryForm">
+    <form [formGroup]="summaryForm" (ngSubmit)="next()">
         <div class="mx-4">
             <h3 for="summary">Summary</h3>
         </div>
@@ -7,8 +7,8 @@
             <textarea class="form-control" style="width: 100%;" type="text" rows="4" formControlName="summary" [placeholder]="summaryData?.summary || 'Professional experience summary'"></textarea>
         </div>
         <div class="d-flex justify-content-between px-4 mt-3">
-            <button class="btn btn-primary" (click)="goBack()">back</button>
-            <button class="btn btn-primary" (click)="proceed()">next</button>
+            <button class="btn btn-primary" (click)="previous()">back</button>
+            <button class="btn btn-primary" type="submit">next</button>
         </div>
     </form>
 </div>
