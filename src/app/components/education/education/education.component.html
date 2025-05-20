@@ -7,28 +7,46 @@
                         <h5>Education {{i + 1}}</h5>
                         <div class="row">
                             <div class="col-6">
-                                <label for="title">Education Title</label>
+                                <label >Education Title</label>
                                 <input type="text" formControlName="title" class="form-control">
                                 <div><app-form-error [control]="education.get('title')"></app-form-error></div>
                             </div>
-                
-                                <div class="col-3">
-                                    <label for="date">Start Date</label>
-                                    <input type="month" formControlName="startDate" class="form-control">
-                                    <div><app-form-error [control]="education.get('startDate')"></app-form-error></div>
-                                </div>
-                                <div class="col-3">
-                                    <label for="date">Graduate Date</label>
-                                    <input type="month" formControlName="gradDate" class="form-control">
-                                    <div><app-form-error [control]="education.get('gradDate')"></app-form-error></div>
-                                </div>
+                            <div class="col-3">
+                                <label >Start Date</label>
+                                <input type="month" formControlName="startDate" class="form-control">
+                                <div><app-form-error [control]="education.get('startDate')"></app-form-error></div>
+                            </div>
+                            <div class="col-3">
+                                <label >Graduate Date</label>
+                                <input type="month" formControlName="gradDate" class="form-control">
+                                <div><app-form-error [control]="education.get('gradDate')"></app-form-error></div>
+                            </div>
                         </div>
                         
                         <div class="row">
-                            <div class="col">
-                                <label for="institute">Institution <span><app-form-error [control]="education.get('institute')"></app-form-error></span></label>
+                            <div class="col-6">
+                                <label>Institution</label>
                                 <input type="text" formControlName="institute" class="form-control">
-                                
+                                <div><app-form-error [control]="education.get('institute')"></app-form-error></div>
+                            </div>
+                            <div class="col-3">
+                                <label>Location</label>
+                                <!-- <input type="text" formControlName="state" class="form-control" placeholder="State"> -->
+                                <select formControlName="state" class="form-control" >
+                                    <option value="" selected>Select State</option>
+                                    <option *ngFor="let state of states" [value]="state.state">{{state.state}}</option>
+                                </select>
+                                <div><app-form-error [control]="education.get('state')"></app-form-error></div>
+                            </div>
+
+                            <div class="col-3">
+                                <label></label>
+                                <!-- <input type="text" formControlName="district" class="form-control" placeholder="District"> -->
+                                <select formControlName="district" class="form-control">
+                                    <option value="">Select District</option>
+                                    <option *ngFor="let district of districts[i] || []" [value]="district">{{district}}</option>
+                                </select>
+                                <div><app-form-error [control]="education.get('district')"></app-form-error></div>
                             </div>
                         </div>
                     </div>
