@@ -3,18 +3,18 @@
         <!-- HEADER -->
         <div class="container"
             [ngClass]="{hightlightBorder: resumeService.currentStep() === 0, bottomBorder: resumeService.currentStep() !== 0}">
-            <div class="mb-3">
-                <div class="row">
+            <div class="row my-2">
+                <div>
                     <h4 class="d-flex justify-content-center align-items-center"
                         style="height: 40px; background-color: black; color: white;">
-                        {{resumeService.headerFormData()?.firstName || savedHeaderData.firstName}}
-                        {{resumeService.headerFormData()?.lastName || savedHeaderData.lastName}}</h4>
+                        {{resumeService.headerFormData()?.firstName || savedHeaderData.firstName || 'Your Name'}}
+                        {{resumeService.headerFormData()?.lastName || savedHeaderData.lastName  }}</h4>
                     <!-- data daripada service instead of own component-->
                 </div>
                 <div class="d-flex justify-content-center">
                     <ng-container *ngIf="!!headerData; else headerPlaceholder">
                         <ul class="list-group list-group-horizontal" style="list-style: none;">
-                            <li class="px-1">{{headerData.contact?.location || 'Location'}}</li>
+                            <li class="px-1">{{headerData.contact?.district + ', ' + headerData.contact?.state || 'Location'}}</li>
                             <!-- Load with data. If no data replace with 'placeholder' -->
                             <li class="px-1"> • {{headerData.contact?.email || 'E-Mail'}}</li>
                             <li class="px-1"> • {{headerData.contact?.phone || 'Phone Number'}}</li>
@@ -34,131 +34,138 @@
         <!-- SUMMARY -->
         <div class="container"
             [ngClass]="{hightlightBorder: resumeService.currentStep() === 1, bottomBorder: resumeService.currentStep() !== 1}">
-            <div class="my-3">
-                <div class="row ">
-                    <h5 class="d-flex justify-content-start">SUMMARY</h5>
-                    <hr>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <p style="text-align: justify;">{{resumeService.summaryFormData()?.summary || 'Your professional career summary'}}</p>
+            <div class="my-2 row">
+                <div>
+                    <div>
+                        <h5 class="d-flex justify-content-start mb-0">SUMMARY</h5>
+                        <hr class="mt-0 mb-1">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div style="text-align: justify;">{{resumeService.summaryFormData()?.summary || 'Your professional career summary'}}</div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- EXPERIENCE -->
-        <div class="container"
-            [ngClass]="{hightlightBorder: resumeService.currentStep() === 2, bottomBorder: resumeService.currentStep() !== 2}">
-            <div class="my-3">
-                <div class="row ">
-                    <h5 class="d-flex justify-content-start">EXPERIENCE</h5>
-                    <hr>
-                </div>
+        <div class="container" [ngClass]="{hightlightBorder: resumeService.currentStep() === 2, bottomBorder: resumeService.currentStep() !== 2}">
+            <div class="my-2 row">
                 <div>
-                    <ng-container *ngIf="resumeService.experienceFormData()?.experiences?.length; else placeholder">
-                        <div class="row" *ngFor="let exp of experienceData?.experiences">
-                            <div class="col-6 text-start">
-                                <div>{{exp.company || savedExpData.company || 'Your previous company name'}}</div>
-                                <div style="font-weight: bold;">{{exp.designation || 'Your designation'}}</div>
-                            </div>
-                            <div class="col-6 text-end">
-                                <div>
-                                    <ng-container *ngIf="exp.startDate; else noDateInfo">
-                                        {{exp.startDate | date: 'MMM yyyy'}} -
-                                        <ng-container *ngIf="exp.isCurrent; else showEndDate">
-                                            Current
+                    <div>
+                        <h5 class="d-flex justify-content-start mb-0">EXPERIENCE</h5>
+                        <hr class="mt-0 mb-1">
+                    </div>
+                    <div>
+                        <ng-container *ngIf="resumeService.experienceFormData()?.experiences?.length; else placeholder">
+                            <div class="row" *ngFor="let exp of experienceData?.experiences">
+                                <div class="col-9 text-start">
+                                    <div>{{exp.company || savedExpData.company || 'Your previous company name'}}</div>
+                                    <div style="font-weight: bold;">{{exp.designation || 'Your designation'}}</div>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <div>
+                                        <ng-container *ngIf="exp.startDate; else noDateInfo">
+                                            {{exp.startDate | date: 'MMM yyyy'}} -
+                                            <ng-container *ngIf="exp.isCurrent; else showEndDate">
+                                                Current
+                                            </ng-container>
+                                            <ng-template #showEndDate>
+                                                {{exp.endDate | date:'MMM yyyy'}}
+                                            </ng-template>
                                         </ng-container>
-                                        <ng-template #showEndDate>
-                                            {{exp.endDate | date:'MMM yyyy'}}
+                                        <ng-template #noDateInfo>
+                                            Date for this experience
                                         </ng-template>
-                                    </ng-container>
-                                    <ng-template #noDateInfo>
+                                    </div>
+                                    <div>{{exp.compLocation || 'Location for this experience'}}</div>
+                                    
+                                </div>
+                                <div>
+                                    <ul class="mx-1">
+                                        <li style="text-align: justify;" *ngFor="let highlight of exp.expHighlight">{{highlight || 'List of work highlights'}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-template #placeholder>
+                            <div class="row">
+                                <div class="col-6 text-start">
+                                    <div>
+                                        Your previous company name
+                                    </div>
+                                    <div style="font-weight: bold;">
+                                        Your Designation
+                                    </div>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <div>
                                         Date for this experience
-                                    </ng-template>
+                                    </div>
+                                    <div>
+                                        Location for this experience
+                                    </div>
                                 </div>
-                                <div>{{exp.compLocation || 'Location for this experience'}}</div>
-                                
+                                <ul class="mx-4">
+                                    <li>
+                                        List of work highlights
+                                    </li>
+                                </ul>
                             </div>
-                            <ul class="mx-4">
-                                <li *ngFor="let highlight of exp.expHighlight">{{highlight || 'List of work highlights'}}</li>
-                            </ul>
-                        </div>
-                    </ng-container>
-                    <ng-template #placeholder>
-                        <div class="row">
-                            <div class="col-6 text-start" style="font-weight: bold;">
-                                <div>
-                                    Your previous company name
-                                </div>
-                                <div>
-                                    Your Designation
-                                </div>
-                            </div>
-                            <div class="col-6 text-end">
-                                <div>
-                                    Date for this experience
-                                </div>
-                                <div>
-                                    Location for this experience
-                                </div>
-                            </div>
-                            <ul>
-                                <li>
-                                    List of work highlights
-                                </li>
-                            </ul>
-                        </div>
-                    </ng-template>
-                    <!-- <div class="row">
-                        <div>
-                            <ul>
-                                <li *ngFor="let x of resumeService.experienceFormData()?.expHighlight || hldata()">
-                                    {{x}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div> -->
+                        </ng-template>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- EDUCATION -->
-        <div class="container"
-            [ngClass]="{hightlightBorder: resumeService.currentStep() === 3, bottomBorder: resumeService.currentStep() !== 3}">
-            <div class="my-3">
-                <div class="row ">
-                    <h5 class="d-flex justify-content-start">EDUCATION</h5>
-                    <hr>
+        <div class="container" [ngClass]="{hightlightBorder: resumeService.currentStep() === 3, bottomBorder: resumeService.currentStep() !== 3}">
+            <div class="my-2 row">
+                <div>
+                    <h5 class="d-flex justify-content-start mb-0">EDUCATION</h5>
+                    <hr class="mt-0 mb-1">
                 </div>
                 <div>
                     <ng-container *ngIf="resumeService.educationFormData()?.educations?.length; else placeholder2">
-                        <div class="row mb-1" *ngFor="let edu of educationData?.educations">
-                            <div class="col-6 text-start" style="font-weight: bold;">
-                                <div>{{edu.title || savedEduData.title || 'Your previous institution name'}}</div>
+                        <div *ngFor="let edu of educationData?.educations">
+                            <div class="row">
+                                <div class="col-9 text-start" style="font-weight: bold;">
+                                    <div>{{edu.title || savedEduData.title || 'Your degree tittle'}}</div>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <div>{{edu.startDate && edu.gradDate ? (edu.startDate | date: 'MMM yyyy') + ' - ' +
+                                        (edu.gradDate | date: 'MMM yyyy') : 'Date for this experience' }}</div>
+                                </div>
                             </div>
-                            <div class="col-6 text-end">
-                                <div>{{edu.startDate && edu.gradDate ? (edu.startDate | date: 'MMM yyyy') + ' - ' +
-                                    (edu.gradDate | date: 'MMM yyyy') : 'Date for this experience' }}</div>
-                            </div>
-                            <div>
-                                {{edu.institute || 'Your previous institution name'}}
+                            <div class="row">
+                                <div class="col-9 text-start">
+                                    {{edu.institute || 'Your previous institution name'}}
+                                </div>
+                                <div class="col-3 text-end">
+                                    {{(edu.district && edu.state) ? (edu.district + ', ' + edu.state) :
+                                    (edu.district || edu.state || 'This institution location')}}
+                                </div>
                             </div>
                         </div>
                     </ng-container>
                     <ng-template #placeholder2>
-                        <div class="row mb-1">
-                            <div class="col-6 text-start" style="font-weight: bold;">
+                        <div class="row">
+                            <div class="col-9 text-start" style="font-weight: bold;">
                                 <div>
-                                    Your previous institution name
+                                    Your degree title
                                 </div>
                             </div>
-                            <div class="col-6 text-end">
+                            <div class="col-3 text-end">
                                 <div>
                                     Date for this experience
                                 </div>
-
                             </div>
-                            <div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 text-start">
                                 Your previous institution name
+                            </div>
+                            <div class="col-3 text-end">
+                                This institution location
                             </div>
                         </div>
                     </ng-template>
@@ -169,10 +176,10 @@
         <!-- SKILLS -->
         <div class="container"
             [ngClass]="{hightlightBorder: resumeService.currentStep() === 4, bottomBorder: resumeService.currentStep() !== 4}">
-            <div class="my-3">
-                <div class="row ">
-                    <h5 class="d-flex justify-content-start">SKILLS</h5>
-                    <hr>
+            <div class="my-2 row">
+                <div>
+                    <h5 class="d-flex justify-content-start mb-0">SKILLS</h5>
+                    <hr class="mt-0 mb-1">
                 </div>
                 <div>
                     <ng-container *ngIf="resumeService.skillsFormData()?.skills?.length; else placeholder3">
