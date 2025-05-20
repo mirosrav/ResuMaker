@@ -9,28 +9,28 @@
           <div style="margin-bottom: 15px;">
             <div class="row">
               <div class="col-6">
-                <label>Company Name</label>
-                <input type="text" formControlName="company" class="form-control">
+                <label for="company">Company Name</label>
+                <input id="company" type="text" formControlName="company" class="form-control">
                 <div><app-form-error [control]="expGroup.get('company')"></app-form-error></div>
               </div>
 
               <div class="col-6">
-                <label>Designation</label>
-                <input type="text" formControlName="designation" class="form-control">
+                <label for="designation">Designation</label>
+                <input id="designation" type="text" formControlName="designation" class="form-control">
                 <div><app-form-error [control]="expGroup.get('designation')"></app-form-error></div>
               </div>
             </div>
 
             <div class="row">
               <div class="col-3">
-                <label>Start Date</label>
-                <input type="month" formControlName="startDate" class="form-control">
+                <label for="startdate">Start Date</label>
+                <input id="startdate" type="month" formControlName="startDate" class="form-control">
                 <div><app-form-error [control]="expGroup.get('startDate')"></app-form-error></div>
               </div>
 
               <div class="col-3">
-                <label>End Date</label>
-                <input *ngIf="!experiences.at(i).get('isCurrent')?.value" type="month" formControlName="endDate" class="form-control">
+                <label for="endDate-{{i}}">End Date</label>
+                <input id="endDate-{{i}}" *ngIf="!experiences.at(i).get('isCurrent')?.value" type="month" formControlName="endDate" class="form-control">
                 <span *ngIf="experiences.at(i).get('isCurrent')?.value" class="form-control">Current</span>
                 <div class="mt-2">
                   <input type="checkbox" [checked]="experiences.at(i).get('isCurrent')?.value" (change)="setToCurrent(i)" id="current-{{i}}">
@@ -40,8 +40,8 @@
               </div>
 
               <div class="col-6">
-                <label>Location</label>
-                <input type="text" formControlName="compLocation" class="form-control">
+                <label for="location">Location</label>
+                <input id="location" type="text" formControlName="compLocation" class="form-control">
                 <div><app-form-error [control]="expGroup.get('compLocation')"></app-form-error></div>
               </div>
             </div>
@@ -52,9 +52,9 @@
           <div formArrayName="expHighlight" class="border-greyer rounded p-2 mb-2">
             <div class="d-flex flex-column gap-2 mb-2">
               <div *ngFor="let hl of getHighlights(i)?.controls; let j = index">
-                <label>Experience Highlight {{j+1}}</label>
+                <label for="highlight">Experience Highlight {{j+1}}</label>
                 <div class="d-flex justify-content-between">
-                  <input type="text" [formControlName]="j" class="form-control" style="margin-right: 10px;">
+                  <input id="highlight" type="text" [formControlName]="j" class="form-control" style="margin-right: 10px;">
                   <button class="btn btn-danger" type="button" (click)="deleteHighlight(i,j)">Delete</button>
                 </div>
                 <div><app-form-error [control]="hl"></app-form-error></div>
