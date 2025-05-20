@@ -34,7 +34,8 @@ export class HeaderComponent implements OnInit {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     contact: new FormGroup({
-      location: new FormControl('', Validators.required),
+      district: new FormControl('', Validators.required),
+      state: new FormControl('',Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       phone: new FormControl('', Validators.required),
     }),

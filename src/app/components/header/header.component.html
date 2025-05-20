@@ -5,14 +5,14 @@
                 <h3>Header</h3>
                 <div class="row mb-2">
                     <div class="col-6">
-                        <label for="firstName">Name</label>
-                        <input class="form-control" type="text" name="firstName" id="" formControlName="firstName"
+                        <label for="name">Name</label>
+                        <input id="name" class="form-control" type="text" formControlName="firstName"
                             [placeholder]="headerStorageData?.firstName || 'First Name'">
                         <app-form-error [control]="headerForm.get('firstName')"></app-form-error>
                     </div>
                     <div class="col-6">
-                        <label for="lastName"></label>
-                        <input class="form-control" type="text" name="lastname" id="" formControlName="lastName"
+                        <label for="lastname"></label>
+                        <input id="lastname" class="form-control" type="text"  formControlName="lastName"
                             [placeholder]="headerStorageData?.lastName || 'Last Name'">
                         <app-form-error [control]="headerForm.get('lastName')"></app-form-error>
                     </div>
@@ -20,23 +20,30 @@
                 <div class="mb-3" formGroupName="contact">
                     <div class="row mb-2">
                         <div class="col">
-                            <label for="location">Location</label>
-                            <input class="form-control" class="form-control" type="text" name="location" id=""
-                                formControlName="location"
-                                [placeholder]="headerStorageData?.contact?.location || 'Enter location'">
-                            <app-form-error [control]="headerForm.get('contact.location')"></app-form-error>
+                            <label for="district">Location</label>
+                            <input id="district" class="form-control" type="text"
+                                formControlName="district"
+                                [placeholder]="headerStorageData?.contact?.district || 'District'">
+                            <app-form-error [control]="headerForm.get('contact.district')"></app-form-error>
+                        </div>
+                        <div class="col">
+                            <label for="state"></label>
+                            <input id="state" class="form-control" type="text"
+                                formControlName="state"
+                                [placeholder]="headerStorageData?.contact?.state || 'State'">
+                            <app-form-error [control]="headerForm.get('contact.state')"></app-form-error>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <label for="email">Email</label>
-                            <input class="form-control" type="email" name="email" id="" formControlName="email"
+                            <input id="email" class="form-control" type="email"  formControlName="email"
                                 [placeholder]="headerStorageData?.contact?.email || 'Enter email'">
                             <app-form-error [control]="headerForm.get('contact.email')"></app-form-error>
                         </div>
                         <div class="col-6">
                             <label for="phone">Phone</label>
-                            <input class="form-control" type="text" name="phone" id="" formControlName="phone"
+                            <input id="phone" class="form-control" type="text"  formControlName="phone"
                                 [placeholder]="headerStorageData?.contact?.phone || 'Enter phone number'">
                             <app-form-error [control]="headerForm.get('contact.phone')"></app-form-error>
                         </div>
