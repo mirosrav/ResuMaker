@@ -12,9 +12,12 @@ export class SharedServiceService {
   educationFormData = signal(this.loadFromLocalStorage('eduData'));
   skillsFormData = signal(this.loadFromLocalStorage('skillData'));
 
-  currentStep = signal(0);
+  currentStep = signal(3);
 
   constructor(){
+    effect(()=>{
+      console.log(this.educationFormData());
+    })
   }
 
 
@@ -94,16 +97,6 @@ export class SharedServiceService {
     })
   }
 
-  handleNext(form: FormGroup | FormArray){
-    this.markFormGroupTouched(form);
-
-    if (form.invalid) {
-      return;
-    }
-
-    this.nextStep();
-    this.updateExpForm(form.value);
-  }
 
   updateFormData<T>(
       signal: {set: (val: T) => void},//arrow function which means signal object has a function named set,that takes 'val' as parameter of type T that returns nothing
