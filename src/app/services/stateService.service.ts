@@ -214,12 +214,12 @@ constructor() { }
     },{
       state: "Labuan",
       district:[
-       
+       ''
       ]
     },{
       state: "Putrajaya",
       district:[
-        
+        ''
       ]
     },
   ]
@@ -229,6 +229,10 @@ constructor() { }
   }
 
   getDistrictsByState(stateName: string) {
+    if(stateName === 'Putrajaya' || stateName === 'Labuan'){
+      return [];
+    }
+    
     const stateObj = this.stateList.find(s => s.state === stateName);
     return stateObj ? stateObj.district : [];
   }
