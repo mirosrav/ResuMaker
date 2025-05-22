@@ -12,7 +12,7 @@ export class SharedServiceService {
   educationFormData = signal(this.loadFromLocalStorage('eduData'));
   skillsFormData = signal(this.loadFromLocalStorage('skillData'));
 
-  currentStep = signal(3);
+  currentStep = signal(0);
 
   constructor(){
     effect(()=>{
