@@ -20,29 +20,41 @@ export class EducationComponent implements OnInit{
   eduStorageData = JSON.parse(localStorage.getItem('eduData') || '{}');
 
   constructor(private eduDataService:SharedServiceService, private stateService: StateServiceService){
-
   }
 
   ngOnInit(){
-    this.hasDataInLocalStorage = !!this.eduStorageData ;
+    this.hasDataInLocalStorage = !!this.eduStorageData;
     const savedData = this.eduStorageData;
+
+    // Load states once
+    this.states = this.stateService.getStates();
+
     if(savedData?.educations?.length){
-      savedData.educations.forEach((edu:any)=>{
+      savedData.educations.forEach((edu:any, index:number)=>{
+        // Initialize districts array for this index
+        this.districts[index] = [];
+
+        // Create the form group
         this.educations.push(this.createEducationList(edu));
+        
+        // If there's a saved state, populate the districts
+        if(edu.state){
+          if(edu.state === 'Putrajaya' || edu.state === 'Labuan'){
+            this.districts[index] = [];
+            // No need to clear validators here since they're already handled in createEducationList
+          }else{
+            this.districts[index] = this.stateService.getDistrictsByState(edu.state);
+          }
+        }
       });
     }else{
+      this.districts[0] = [];
       this.educations.push(this.createEducationList());
     }
 
     this.educationListForm.valueChanges.subscribe((newdata)=>{
       this.eduDataService.updateEduPreview(newdata);
-    })
-
-    this.states = this.stateService.getStates();
-    // this.educationListForm.get('state')?.valueChanges.subscribe(selectedState =>{
-    //   this.districts = this.stateService.getDistrictsByState(selectedState);
-    // })
-
+    });
   }
 
   educationListForm = new FormGroup({
@@ -50,28 +62,61 @@ export class EducationComponent implements OnInit{
   })
 
   createEducationList(data?:any):FormGroup{
+    // Check if this is a federal territory to conditionally set district validator
+    const isFederalTerritory = data?.state === 'Putrajaya' || data?.state === 'Labuan';
+    
     const group = new FormGroup({
       title: new FormControl(data?.title || '', Validators.required),
       startDate: new FormControl(data?.startDate || '', Validators.required),
       gradDate: new FormControl(data?.gradDate || '', Validators.required),
       institute: new FormControl(data?.institute || '', Validators.required),
-      district: new FormControl(data?.district || null, Validators.required),
-      state: new FormControl(data?.state || null, Validators.required)  // Changed from data?.district to data?.state
+      district: new FormControl(data?.district || '', isFederalTerritory ? [] : Validators.required),
+      state: new FormControl(data?.state || '', Validators.required)
     });
 
-    group.get('state')?.valueChanges.subscribe((selectedState)=>{
-      if(selectedState){
-        const districtList = this.stateService.getDistrictsByState(selectedState);
-
+    group.get('state')?.valueChanges.subscribe((selectedState) => {
+      if (selectedState) {
         const index = this.educations.controls.findIndex(control => control === group);
-
-        this.districts[index] = districtList;
-
-        group.get('district')?.setValue('');
+        
+        if (selectedState === 'Putrajaya' || selectedState === 'Labuan') {
+          // Federal territories - no districts
+          this.districts[index] = [];
+          
+          // Clear district requirement and value
+          const districtControl = group.get('district');
+          districtControl?.clearValidators();
+          districtControl?.setValue('');
+          districtControl?.updateValueAndValidity();
+          
+        } else {
+          // Regular states - load districts and require selection
+          const districtList = this.stateService.getDistrictsByState(selectedState);
+          this.districts[index] = districtList;
+          
+          // Ensure district is required for regular states
+          const districtControl = group.get('district');
+          districtControl?.setValidators(Validators.required);
+          
+          // Only clear district value if current district is not valid for new state
+          const currentDistrict = districtControl?.value;
+          if (currentDistrict && !districtList.includes(currentDistrict)) {
+            districtControl?.setValue('');
+          }
+          
+          districtControl?.updateValueAndValidity();
+        }
       }
     });
 
     return group;
+  }
+
+  getDistrictForIndex(index:number):string[]{
+    return this.districts[index] || [];
+  }
+
+  hasDistrictForIndex(index:number):boolean{
+    return this.districts[index] && this.districts[index].length > 0;
   }
 
   get educations():FormArray{
@@ -79,18 +124,21 @@ export class EducationComponent implements OnInit{
   }
 
   addEducation(){
+    const newIndex = this.educations.length;
+    this.districts[newIndex] = []; // Initialize districts array for new form
     this.educations.push(this.createEducationList());
   }
 
   updateEducation(){
     this.eduDataService.updateEduForm(this.educationListForm.value);
-    // this.eduData.nextStep();
   }
 
   deleteEducation(index:number){
     const confirmed = confirm("Are you sure to delete this education?")
     if(confirmed){
       this.educations.removeAt(index);
+      // Clean up districts array
+      delete this.districts[index];
     }
   }
 
@@ -108,5 +156,4 @@ export class EducationComponent implements OnInit{
   previous(){
     this.eduDataService.prevStep();
   }
-
 }
